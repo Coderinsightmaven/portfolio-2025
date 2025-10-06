@@ -13,8 +13,46 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pascal Strasche | Webflow Developer",
-  description: "High-quality Webflow sites for startups and agencies",
+  title: "Liam | Full Stack Developer & Web Designer",
+  description: "Creative full-stack developer specializing in modern web technologies, responsive design, and innovative digital solutions for startups and businesses.",
+  keywords: ["full stack developer", "web designer", "react", "next.js", "typescript", "portfolio", "Liam"],
+  authors: [{ name: "Liam" }],
+  creator: "Liam",
+  publisher: "Liam",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL('https://liam-portfolio.vercel.app'), // Update this with your actual domain
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Liam | Full Stack Developer & Web Designer",
+    description: "Creative full-stack developer specializing in modern web technologies, responsive design, and innovative digital solutions.",
+    url: "https://liam-portfolio.vercel.app",
+    siteName: "Liam's Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Liam | Full Stack Developer & Web Designer",
+    description: "Creative full-stack developer specializing in modern web technologies, responsive design, and innovative digital solutions.",
+    creator: "@liamdev", // Update with your Twitter handle
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
