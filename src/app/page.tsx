@@ -6,8 +6,9 @@ import { Pattern } from "@/components/pattern";
 import { ProjectCard } from "@/components/ProjectCard";
 import { FeatureCard } from "@/components/FeatureCard";
 import { SectionHeader } from "@/components/SectionHeader";
-import { PatternedBackground } from "@/components/background";
+
 import { AnimatedBadge } from "@/components/AnimatedBadge";
+import ServiceCards from "@/components/ServiceCards";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -309,10 +310,10 @@ export default function Home() {
       <div className="h-16 sm:h-20 md:h-24 lg:h-32"></div>
 
       {/* Services Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-blue-50/30 border-t border-blue-100 flex justify-center">
+      <section className="relative bg-gradient-to-b from-gray-900 to-gray-800 border-t border-gray-700 flex justify-center">
         <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12">
           <div className="flex justify-center mb-12 sm:mb-16">
-            <div className="text-center max-w-4xl">
+            <div className="text-center max-w-4xl p-4">
               <SectionHeader
                 badge="⚡ Services"
                 title="What I Offer"
@@ -320,63 +321,8 @@ export default function Home() {
               />
             </div>
           </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16">
-            {/* Development Services */}
-            <div className="space-y-6 sm:space-y-8">
-              <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Development</h3>
-                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
-              </div>
-
-              <div className="space-y-6 sm:space-y-8">
-                <FeatureCard
-                  icon="💻"
-                  title="Web Development"
-                  description="Custom websites built with modern technologies and best practices for optimal performance and user experience."
-                />
-
-                <FeatureCard
-                  icon="📱"
-                  title="Responsive Design"
-                  description="Pixel-perfect designs that work flawlessly across all devices and screen sizes."
-                />
-
-                <FeatureCard
-                  icon="⚡"
-                  title="Performance"
-                  description="Lightning-fast load times and optimized code for the best possible user experience."
-                />
-              </div>
-            </div>
-
-            {/* Design & Optimization Services */}
-            <div className="space-y-6 sm:space-y-8">
-              <div className="text-center mb-6 sm:mb-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Design & Optimization</h3>
-                <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-teal-500 mx-auto rounded-full"></div>
-              </div>
-
-              <div className="space-y-6 sm:space-y-8">
-                <FeatureCard
-                  icon="🎨"
-                  title="UI/UX Design"
-                  description="Beautiful, intuitive interfaces designed with your users in mind, ensuring engagement and conversion."
-                />
-
-                <FeatureCard
-                  icon="🔧"
-                  title="Maintenance"
-                  description="Ongoing support and updates to keep your website secure, fast, and up-to-date."
-                />
-
-                <FeatureCard
-                  icon="🚀"
-                  title="SEO Optimization"
-                  description="Search engine optimization to help your website rank higher and attract more visitors."
-                />
-              </div>
-            </div>
+          <div className="flex justify-center px-4">
+          <ServiceCards />
           </div>
         </div>
       </section>

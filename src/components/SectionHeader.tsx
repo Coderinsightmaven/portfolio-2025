@@ -23,7 +23,7 @@ export const SectionHeader = ({ badge, title, subtitle, centered = true }: Secti
         </span>
       </h2>
       {subtitle && (
-        <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-4xl mx-auto px-2 sm:px-0">
+        <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-4xl mx-auto px-2 sm:px-0">
           {subtitle}
         </p>
       )}
