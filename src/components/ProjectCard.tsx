@@ -37,6 +37,7 @@ export const ProjectCard = ({ title, description, icon, image, link, gradient, p
             alt={title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-110"
+            style={{ objectPosition: 'center top' }}
             sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 380px"
           />
           {/* Dark overlay for text readability */}

@@ -76,7 +76,7 @@ const ProjectCarousel = () => {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 6,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -84,49 +84,21 @@ const ProjectCarousel = () => {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1920,
-        settings: {
-          slidesToShow: 7,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 1680,
-        settings: {
-          slidesToShow: 6,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 1440,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 1,
-        }
-      },
-      {
         breakpoint: 1280,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 768,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         }
       },
       {
-        breakpoint: 640,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,

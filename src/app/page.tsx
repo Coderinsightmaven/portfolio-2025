@@ -33,10 +33,10 @@ export default function Home() {
     <div className="min-h-screen w-full">
       {/* Navigation */}
       <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-4xl px-4 sm:px-6">
-        <div className="bg-white/90 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-lg border border-gray-200/50 px-4 sm:px-6 py-3 sm:py-4">
+        <div className="bg-gray-900/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-2xl border border-gray-700/50 px-4 sm:px-6 py-3 sm:py-4 ring-1 ring-white/10">
           <div className="flex justify-between items-center">
             {/* Logo */}
-            <div className="text-lg font-bold bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 bg-clip-text text-transparent">
+            <div className="text-lg font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent hover:scale-110 transition-transform duration-300">
               LM
             </div>
 
@@ -44,37 +44,37 @@ export default function Home() {
             <div className="hidden md:flex items-center gap-8">
               <a
                 href="#home"
-                className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-all hover:scale-105 relative group"
+                className="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-all hover:scale-105 relative group"
               >
                 Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-cyan-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
               </a>
               <a
                 href="#projects"
-                className="text-sm font-medium text-gray-700 hover:text-cyan-600 transition-all hover:scale-105 relative group"
+                className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-all hover:scale-105 relative group"
               >
                 Projects
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-600 to-teal-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-300"></span>
           </a>
           <a
                 href="#about"
-                className="text-sm font-medium text-gray-700 hover:text-teal-600 transition-all hover:scale-105 relative group"
+                className="text-sm font-medium text-gray-300 hover:text-purple-400 transition-all hover:scale-105 relative group"
               >
                 About
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-teal-600 to-blue-600 group-hover:w-full transition-all duration-300"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-cyan-400 group-hover:w-full transition-all duration-300"></span>
               </a>
             </div>
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              <AnimatedButton href="#contact" variant="secondary">
+              <AnimatedButton href="#contact" variant="primary">
                 Let's talk
               </AnimatedButton>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-700 hover:text-purple-600 transition-colors"
+              className="md:hidden text-gray-300 hover:text-cyan-400 transition-colors"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <svg
@@ -95,31 +95,31 @@ export default function Home() {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl rounded-xl shadow-lg border border-gray-200/50 overflow-hidden">
+            <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-gray-900/95 backdrop-blur-xl rounded-xl shadow-2xl border border-gray-700/50 overflow-hidden ring-1 ring-white/10">
               <div className="flex flex-col py-2">
                 <a
                   href="#home"
-                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all"
+                  className="px-6 py-3 text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Home
                 </a>
                 <a
                   href="#projects"
-                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 transition-all"
+                  className="px-6 py-3 text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800/50 transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Projects
                 </a>
                 <a
                   href="#about"
-                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50 transition-all"
+                  className="px-6 py-3 text-sm font-medium text-gray-300 hover:text-purple-400 hover:bg-gray-800/50 transition-all"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   About
                 </a>
                 <div className="px-6 py-3">
-                  <AnimatedButton href="#contact" variant="secondary">
+                  <AnimatedButton href="#contact" variant="primary">
                     Let's talk
                   </AnimatedButton>
                 </div>
@@ -130,14 +130,11 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-4 sm:top-20 sm:left-10 w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-          <div className="absolute top-20 right-4 sm:top-40 sm:right-10 w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-          <div className="absolute -bottom-4 left-8 sm:-bottom-8 sm:left-20 w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Falling Stars Background */}
 
-        <div className="relative w-full px-4 sm:px-6 z-10 text-center">
+
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 z-10 text-center">
           <div
             className={`transition-all duration-1000 ${
               isVisible
@@ -145,28 +142,48 @@ export default function Home() {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1]">
-              <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
-                High-quality Solutions
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white m-6">
+              <span className="text-sm font-medium text-cyan-400 mr-2">✨</span>
+              <span className="text-sm text-gray-300 font-medium">Full-Stack Developer & UI/UX Designer</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 sm:mb-8 leading-[1.05] tracking-tight">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent animate-gradient animate-text-glow">
+                Crafting Digital
               </span>
               <br />
-              <span className="text-gray-900">for Startups and Agencies</span>
+              <span className="text-white animate-pulse">Experiences That</span>
+              <br />
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+                Amaze & Convert
+              </span>
             </h1>
-            <div className="flex justify-center">
-              <p className="sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 max-w-4xl leading-relaxed text-center">
-                As a certified Webflow developer and experienced UI/UX designer,
-                I create custom, high-quality websites that stand out and are
-                fun to use.
+
+            <div className="flex justify-center mb-8 sm:mb-12">
+              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8 sm:mb-10 max-w-4xl leading-relaxed text-center font-light">
+                Transforming ideas into stunning, high-performance websites that drive results.
+                <span className="text-cyan-400 font-medium"> Webflow certified</span> with expertise in modern web technologies.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4 sm:px-0">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 px-4 sm:px-0">
               <AnimatedButton href="#contact" variant="primary">
-                Let's talk
+                Start Your Project
               </AnimatedButton>
               <AnimatedButton href="#projects" variant="secondary">
-                View Projects
+                Explore Work
               </AnimatedButton>
             </div>
+
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -176,9 +193,9 @@ export default function Home() {
       {/* Projects Showcase */}
       <section
         id="projects"
-        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100"
+        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 "
       >
-        <div className="relative w-full px-4 sm:px-6 lg:px-12">
+        <div className="relative w-full px-4 sm:px-6 lg:px-12 border-t-2 border-gray-700">
           <div className="flex justify-center">
             <SectionHeader
               badge="💼 Portfolio"
@@ -191,8 +208,24 @@ export default function Home() {
         </div>
       </section>
       {/* Services Section */}
-      <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-gray-900 to-gray-800 border-t border-gray-700 flex justify-center">
-        <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12">
+      <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-gray-900 to-gray-800 border-t border-cyan-400/30 flex justify-center">
+        {/* Lava Lamp Background */}
+        <div id="lamp" className="absolute pointer-events-none">
+          <div id="top"></div>
+          <div id="glass">
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+            <div className="bubble"></div>
+          </div>
+          <div id="bottom"></div>
+        </div>
+        <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12 z-10">
           <div className="flex justify-center mb-12 sm:mb-16">
             <div className="text-center max-w-4xl p-4">
               <SectionHeader
@@ -212,7 +245,7 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 overflow-hidden border-t border-cyan-400/30"
+        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 overflow-hidden border-t border-cyan-400/30"
       >
         <Pattern variant="waves" className="text-white opacity-10" />
 
@@ -244,7 +277,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white border-t border-gray-700">
+      <footer className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 text-white border-t border-gray-700">
         <Pattern variant="grid" className="text-white opacity-5" />
         <div className="relative w-full px-4 sm:px-6 text-center z-10">
           <p className="text-sm sm:text-base text-gray-400">
