@@ -5,7 +5,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const RocketShip = () => {
-  const [key, setKey] = useState(0);
+  const [key, setKey] = useState(1);
 
   // Generate 33 engine positions evenly spaced across the rocket bottom
   const engines = [];
@@ -30,14 +30,8 @@ const RocketShip = () => {
       setKey(prev => prev + 1);
     }, 25000);
 
-    // Initial launch after 2 seconds
-    const initialTimeout = setTimeout(() => {
-      setKey(prev => prev + 1);
-    }, 2000);
-
     return () => {
       clearInterval(interval);
-      clearTimeout(initialTimeout);
     };
   }, []);
 
