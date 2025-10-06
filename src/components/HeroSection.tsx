@@ -67,7 +67,7 @@ const TypewriterText = () => {
     const currentTitle = titles[currentTitleIndex];
     const typeSpeed = 100; // ms per character
     const deleteSpeed = 50; // ms per character when deleting
-    const pauseTime = 2000; // ms to pause at full text
+    const pauseTime = 5000; // ms to pause at full text
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
