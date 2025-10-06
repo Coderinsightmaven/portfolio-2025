@@ -130,7 +130,7 @@ export default function NewHeroSection() {
               </span>
             </button>
           </div>
-          <div className="flex lg:hidden">
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex lg:hidden">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
