@@ -3,19 +3,31 @@
 import { useState, useEffect } from "react";
 import { AnimatedButton } from "@/components/AnimatedButton";
 import { Pattern } from "@/components/pattern";
-import { ProjectCard } from "@/components/ProjectCard";
-import { FeatureCard } from "@/components/FeatureCard";
+import ProjectCarousel from "@/components/ProjectCarousel";
 import { SectionHeader } from "@/components/SectionHeader";
 
-import { AnimatedBadge } from "@/components/AnimatedBadge";
 import ServiceCards from "@/components/ServiceCards";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (isMobileMenuOpen && !target.closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
 
   return (
     <div className="min-h-screen w-full">
@@ -61,7 +73,10 @@ export default function Home() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button className="md:hidden text-gray-700 hover:text-purple-600 transition-colors">
+            <button
+              className="md:hidden text-gray-700 hover:text-purple-600 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -77,6 +92,40 @@ export default function Home() {
               </svg>
             </button>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 right-0 mt-2 bg-white/95 backdrop-blur-xl rounded-xl shadow-lg border border-gray-200/50 overflow-hidden">
+              <div className="flex flex-col py-2">
+                <a
+                  href="#home"
+                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </a>
+                <a
+                  href="#projects"
+                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-cyan-600 hover:bg-cyan-50 transition-all"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Projects
+                </a>
+                <a
+                  href="#about"
+                  className="px-6 py-3 text-sm font-medium text-gray-700 hover:text-teal-600 hover:bg-teal-50 transition-all"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </a>
+                <div className="px-6 py-3">
+                  <AnimatedButton href="#contact" variant="secondary">
+                    Let's talk
+                  </AnimatedButton>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
@@ -96,9 +145,6 @@ export default function Home() {
                 : "opacity-0 translate-y-10"
             }`}
           >
-            <div className="flex justify-center mb-4">
-              <AnimatedBadge />
-            </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-[1.1]">
               <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent">
                 High-quality Solutions
@@ -141,174 +187,9 @@ export default function Home() {
             />
           </div>
 
-          <div className="w-full overflow-hidden group relative">
-            {/* Scroll indicators */}
-            <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </div>
-            </div>
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-              <div className="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg">
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </div>
-            </div>
-
-            <div
-              className="flex gap-4 sm:gap-6 animate-scroll px-4 sm:px-6 hover:animate-none cursor-grab active:cursor-grabbing scroll-hide"
-              onWheel={(e) => {
-                e.preventDefault();
-                e.currentTarget.scrollLeft += e.deltaY;
-              }}
-              onMouseDown={(e) => {
-                const container = e.currentTarget;
-                let startX = e.clientX;
-                let scrollLeft = container.scrollLeft;
-
-                const handleMouseMove = (e: MouseEvent) => {
-                  const x = e.clientX - startX;
-                  container.scrollLeft = scrollLeft - x;
-                };
-
-                const handleMouseUp = () => {
-                  document.removeEventListener('mousemove', handleMouseMove);
-                  document.removeEventListener('mouseup', handleMouseUp);
-                };
-
-                document.addEventListener('mousemove', handleMouseMove);
-                document.addEventListener('mouseup', handleMouseUp);
-              }}
-            >
-              <ProjectCard
-                title="Brand Design"
-                description="Complete brand identity and visual design system"
-                icon="🎨"
-                image="https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?w=400&h=300&fit=crop&crop=center"
-                link="https://example.com/brand-design"
-                gradient="bg-gradient-to-br from-blue-500 to-cyan-500"
-                pattern="dots"
-              />
-              <ProjectCard
-                title="E-commerce"
-                description="Modern online store with seamless checkout experience"
-                icon="🛍️"
-                image="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&crop=center"
-                link="https://example.com/ecommerce-store"
-                gradient="bg-gradient-to-br from-cyan-500 to-teal-500"
-                pattern="waves"
-              />
-              <ProjectCard
-                title="Analytics Dashboard"
-                description="Real-time data visualization and reporting platform"
-                icon="📊"
-                image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&crop=center"
-                link="https://example.com/analytics-dashboard"
-                gradient="bg-gradient-to-br from-blue-600 to-indigo-600"
-                pattern="grid"
-              />
-              <ProjectCard
-                title="Sustainability"
-                description="Green energy platform with impact tracking"
-                icon="🌱"
-                gradient="bg-gradient-to-br from-green-500 to-emerald-500"
-                pattern="diagonal"
-              />
-              <ProjectCard
-                title="Startup Launch"
-                description="MVP development and market validation"
-                icon="🚀"
-                gradient="bg-gradient-to-br from-teal-500 to-green-500"
-                pattern="dots"
-              />
-              <ProjectCard
-                title="Mobile App"
-                description="Cross-platform mobile application"
-                icon="📱"
-                gradient="bg-gradient-to-br from-teal-500 to-cyan-500"
-                pattern="waves"
-              />
-              <ProjectCard
-                title="Enterprise Solution"
-                description="Scalable B2B software platform"
-                icon="💼"
-                gradient="bg-gradient-to-br from-blue-500 to-cyan-600"
-                pattern="grid"
-              />
-              <ProjectCard
-                title="Performance"
-                description="Speed optimization and technical excellence"
-                icon="⚡"
-                gradient="bg-gradient-to-br from-amber-500 to-yellow-500"
-                pattern="diagonal"
-              />
-              {/* Duplicate cards for infinite loop */}
-              <ProjectCard
-                title="Brand Design"
-                description="Complete brand identity and visual design system"
-                icon="🎨"
-                gradient="bg-gradient-to-br from-blue-500 to-cyan-500"
-                pattern="dots"
-              />
-              <ProjectCard
-                title="E-commerce"
-                description="Modern online store with seamless checkout experience"
-                icon="🛍️"
-                gradient="bg-gradient-to-br from-cyan-500 to-teal-500"
-                pattern="waves"
-              />
-              <ProjectCard
-                title="Analytics Dashboard"
-                description="Real-time data visualization and reporting platform"
-                icon="📊"
-                gradient="bg-gradient-to-br from-blue-600 to-indigo-600"
-                pattern="grid"
-              />
-              <ProjectCard
-                title="Sustainability"
-                description="Green energy platform with impact tracking"
-                icon="🌱"
-                gradient="bg-gradient-to-br from-green-500 to-emerald-500"
-                pattern="diagonal"
-              />
-              <ProjectCard
-                title="Startup Launch"
-                description="MVP development and market validation"
-                icon="🚀"
-                gradient="bg-gradient-to-br from-teal-500 to-green-500"
-                pattern="dots"
-              />
-              <ProjectCard
-                title="Mobile App"
-                description="Cross-platform mobile application"
-                icon="📱"
-                gradient="bg-gradient-to-br from-teal-500 to-cyan-500"
-                pattern="waves"
-              />
-              <ProjectCard
-                title="Enterprise Solution"
-                description="Scalable B2B software platform"
-                icon="💼"
-                gradient="bg-gradient-to-br from-blue-500 to-cyan-600"
-                pattern="grid"
-              />
-              <ProjectCard
-                title="Performance"
-                description="Speed optimization and technical excellence"
-                icon="⚡"
-                gradient="bg-gradient-to-br from-amber-500 to-yellow-500"
-                pattern="diagonal"
-              />
-            </div>
-          </div>
+          <ProjectCarousel />
         </div>
       </section>
-
-      <div className="h-16 sm:h-20 md:h-24 lg:h-32"></div>
-
       {/* Services Section */}
       <section className="relative bg-gradient-to-b from-gray-900 to-gray-800 border-t border-gray-700 flex justify-center">
         <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12">

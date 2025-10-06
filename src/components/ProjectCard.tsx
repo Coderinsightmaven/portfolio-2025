@@ -67,7 +67,7 @@ export const ProjectCard = ({ title, description, icon, image, link, gradient, p
       </div>
 
       {/* Border Glow */}
-      <div className="absolute inset-0 border-2 border-white/20 rounded-2xl group-hover:border-white/40 transition-colors duration-500" />
+      <div className="absolute inset-0 border-2 border-white/20 group-hover:border-white/40 transition-colors duration-500" />
     </>
   );
 
@@ -77,7 +77,7 @@ export const ProjectCard = ({ title, description, icon, image, link, gradient, p
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex-none w-80 sm:w-96 md:w-[380px] h-64 sm:h-72 md:h-[280px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl block"
+        className="group relative block w-full h-72 sm:h-80 md:h-[320px] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -88,7 +88,7 @@ export const ProjectCard = ({ title, description, icon, image, link, gradient, p
 
   return (
     <div
-      className="group relative flex-none w-80 sm:w-96 md:w-[380px] h-64 sm:h-72 md:h-[280px] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl"
+      className="group relative w-full h-72 sm:h-80 md:h-[320px] overflow-hidden cursor-pointer transition-all duration-500 hover:shadow-2xl"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
