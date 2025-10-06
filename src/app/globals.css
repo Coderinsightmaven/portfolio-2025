@@ -43,108 +43,179 @@ body {
 }
 
 /* Use CSS custom properties with calc for efficient variations */
+/* Negative delays staggered to ensure continuous star flow */
 .star[data-star-index="0"] {
   color: #00ffff;
   top: 20vh;
-  animation: fall 8s 1s linear infinite;
+  animation: fall 8s -0.5s linear infinite;
 }
 
 .star[data-star-index="1"] {
   color: #0080ff;
   top: 40vh;
   width: 7.5em;
-  animation: fall 10s 2s linear infinite;
+  animation: fall 10s -3.3s linear infinite;
 }
 
 .star[data-star-index="2"] {
   color: #8000ff;
   top: 60vh;
   width: 6.2em;
-  animation: fall 7s 3s linear infinite;
+  animation: fall 7s -1.2s linear infinite;
 }
 
 .star[data-star-index="3"] {
   color: #ff00ff;
   top: 80vh;
   width: 7em;
-  animation: fall 9.5s 0.5s linear infinite;
+  animation: fall 9.5s -6.8s linear infinite;
 }
 
 .star[data-star-index="4"] {
   color: #00ff80;
   top: 10vh;
   width: 5.8em;
-  animation: fall 11s 4s linear infinite;
+  animation: fall 11s -8.5s linear infinite;
 }
 
 .star[data-star-index="5"] {
   color: #ff8000;
   top: 30vh;
   width: 6.9em;
-  animation: fall 8.5s 1.5s linear infinite;
+  animation: fall 8.5s -2.1s linear infinite;
 }
 
 .star[data-star-index="6"] {
   color: #ffff00;
   top: 50vh;
   width: 7.4em;
-  animation: fall 9.2s 2.8s linear infinite;
+  animation: fall 9.2s -5.7s linear infinite;
 }
 
 .star[data-star-index="7"] {
   color: #ff0080;
   top: 70vh;
   width: 5.5em;
-  animation: fall 10.5s 0.8s linear infinite;
+  animation: fall 10.5s -7.2s linear infinite;
 }
 
 .star[data-star-index="8"] {
   color: #80ff00;
   top: 90vh;
   width: 6.7em;
-  animation: fall 8.8s 3.2s linear infinite;
+  animation: fall 8.8s -4.4s linear infinite;
 }
 
 .star[data-star-index="9"] {
   color: #ff4040;
   top: 15vh;
   width: 7.2em;
-  animation: fall 9.7s 1.2s linear infinite;
+  animation: fall 9.7s -1.8s linear infinite;
 }
 
 .star[data-star-index="10"] {
   color: #40ffff;
   top: 25vh;
   width: 6.4em;
-  animation: fall 8.3s 2.3s linear infinite;
+  animation: fall 8.3s -6.1s linear infinite;
 }
 
 .star[data-star-index="11"] {
   color: #ff40ff;
   top: 45vh;
   width: 7.1em;
-  animation: fall 10.2s 3.5s linear infinite;
+  animation: fall 10.2s -9.3s linear infinite;
 }
 
 .star[data-star-index="12"] {
   color: #80ffff;
   top: 65vh;
   width: 5.9em;
-  animation: fall 9.4s 1.8s linear infinite;
+  animation: fall 9.4s -3.7s linear infinite;
 }
 
 .star[data-star-index="13"] {
   color: #ffff80;
   top: 85vh;
   width: 6.6em;
-  animation: fall 8.1s 2.6s linear infinite;
+  animation: fall 8.1s -5.0s linear infinite;
 }
 
 .star[data-star-index="14"] {
   color: #ff80ff;
   top: 35vh;
   width: 7.3em;
-  animation: fall 11.3s 0.3s linear infinite;
+  animation: fall 11.3s -10.1s linear infinite;
+}
+
+.star[data-star-index="15"] {
+  color: #00d4ff;
+  top: 5vh;
+  width: 6.1em;
+  animation: fall 8.7s -2.9s linear infinite;
+}
+
+.star[data-star-index="16"] {
+  color: #ff6b9d;
+  top: 55vh;
+  width: 7.6em;
+  animation: fall 9.9s -7.8s linear infinite;
+}
+
+.star[data-star-index="17"] {
+  color: #b4ff00;
+  top: 75vh;
+  width: 5.7em;
+  animation: fall 10.8s -4.9s linear infinite;
+}
+
+.star[data-star-index="18"] {
+  color: #ff9500;
+  top: 12vh;
+  width: 6.8em;
+  animation: fall 7.5s -1.5s linear infinite;
+}
+
+.star[data-star-index="19"] {
+  color: #9d00ff;
+  top: 38vh;
+  width: 7.0em;
+  animation: fall 11.5s -9.7s linear infinite;
+}
+
+.star[data-star-index="20"] {
+  color: #00ffcc;
+  top: 62vh;
+  width: 6.3em;
+  animation: fall 8.2s -6.4s linear infinite;
+}
+
+.star[data-star-index="21"] {
+  color: #ffcc00;
+  top: 82vh;
+  width: 7.8em;
+  animation: fall 9.3s -3.1s linear infinite;
+}
+
+.star[data-star-index="22"] {
+  color: #ff0066;
+  top: 18vh;
+  width: 5.6em;
+  animation: fall 10.1s -8.2s linear infinite;
+}
+
+.star[data-star-index="23"] {
+  color: #66ff00;
+  top: 48vh;
+  width: 6.5em;
+  animation: fall 8.9s -5.3s linear infinite;
+}
+
+.star[data-star-index="24"] {
+  color: #cc66ff;
+  top: 92vh;
+  width: 7.4em;
+  animation: fall 9.6s -0.7s linear infinite;
 }
 
 /* Star tail effect */
@@ -388,8 +459,13 @@ body {
     backdrop-filter: blur(8px) !important;
   }
 
-  /* Reduce will-change usage on mobile */
+  /* Reduce will-change usage on mobile, but keep for stars */
   * {
     will-change: auto !important;
+  }
+  
+  /* Keep will-change for star animations on mobile for immediate rendering */
+  .star {
+    will-change: transform !important;
   }
 }
