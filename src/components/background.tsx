@@ -109,6 +109,32 @@ const FlyingAirplanes = () => {
   );
 };
 
+export const FlyingAirplanesBackground = () => {
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+
+    checkIsDesktop();
+    window.addEventListener('resize', checkIsDesktop);
+
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
+
+  // Don't render on mobile
+  if (!isDesktop) {
+    return null;
+  }
+
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <FlyingAirplanes />
+    </div>
+  );
+};
+
 export const PatternedBackground = () => {
   const [isDesktop, setIsDesktop] = useState(true);
 
@@ -116,10 +142,10 @@ export const PatternedBackground = () => {
     const checkIsDesktop = () => {
       setIsDesktop(window.innerWidth >= 768);
     };
-    
+
     checkIsDesktop();
     window.addEventListener('resize', checkIsDesktop);
-    
+
     return () => window.removeEventListener('resize', checkIsDesktop);
   }, []);
 

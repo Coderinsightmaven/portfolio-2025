@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { FlyingAirplanesBackground } from "@/components/background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -88,6 +89,25 @@ export default function RootLayout({
             <div key={i} className="star" data-star-index={i} role="presentation"></div>
           ))}
         </div>
+        <FlyingAirplanesBackground />
+
+        {/* Static Moon in Upper Right Corner */}
+        <div className="fixed top right-4 z-10 pointer-events-none" role="presentation">
+          <svg
+            width="80"
+            height="80"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="text-yellow-200 drop-shadow-xl"
+          >
+            <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.9"/>
+            <circle cx="8" cy="8" r="2" fill="#ffffff" opacity="0.6"/>
+            <circle cx="14" cy="10" r="1.5" fill="#ffffff" opacity="0.4"/>
+            <circle cx="10" cy="14" r="1" fill="#ffffff" opacity="0.3"/>
+          </svg>
+        </div>
+
         {children}
       </body>
     </html>
