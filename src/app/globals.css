@@ -112,6 +112,41 @@ body {
   animation: fall 9.7s 1.2s linear infinite;
 }
 
+.star[data-star-index="10"] {
+  color: #40ffff;
+  top: 25vh;
+  width: 6.4em;
+  animation: fall 8.3s 2.3s linear infinite;
+}
+
+.star[data-star-index="11"] {
+  color: #ff40ff;
+  top: 45vh;
+  width: 7.1em;
+  animation: fall 10.2s 3.5s linear infinite;
+}
+
+.star[data-star-index="12"] {
+  color: #80ffff;
+  top: 65vh;
+  width: 5.9em;
+  animation: fall 9.4s 1.8s linear infinite;
+}
+
+.star[data-star-index="13"] {
+  color: #ffff80;
+  top: 85vh;
+  width: 6.6em;
+  animation: fall 8.1s 2.6s linear infinite;
+}
+
+.star[data-star-index="14"] {
+  color: #ff80ff;
+  top: 35vh;
+  width: 7.3em;
+  animation: fall 11.3s 0.3s linear infinite;
+}
+
 /* Star tail effect */
 .star::before,
 .star::after {
@@ -253,6 +288,78 @@ body {
   animation-delay: -15s;
 }
 
+@keyframes fly-across-4 {
+  0% {
+    transform: translateX(-100px) translateY(35vh) rotate(0deg);
+  }
+  25% {
+    transform: translateX(25vw) translateY(30vh) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(50vw) translateY(38vh) rotate(1deg);
+  }
+  75% {
+    transform: translateX(75vw) translateY(33vh) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(36vh) rotate(0deg);
+  }
+}
+
+@keyframes fly-across-5 {
+  0% {
+    transform: translateX(-100px) translateY(50vh) rotate(0deg);
+  }
+  20% {
+    transform: translateX(20vw) translateY(48vh) rotate(2deg);
+  }
+  40% {
+    transform: translateX(40vw) translateY(52vh) rotate(-1deg);
+  }
+  60% {
+    transform: translateX(60vw) translateY(49vh) rotate(1deg);
+  }
+  80% {
+    transform: translateX(80vw) translateY(51vh) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(50vh) rotate(0deg);
+  }
+}
+
+@keyframes fly-across-6 {
+  0% {
+    transform: translateX(-100px) translateY(75vh) rotate(0deg);
+  }
+  30% {
+    transform: translateX(30vw) translateY(72vh) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(60vw) translateY(78vh) rotate(2deg);
+  }
+  90% {
+    transform: translateX(90vw) translateY(74vh) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px)) translateY(76vh) rotate(0deg);
+  }
+}
+
+.animate-fly-4 {
+  animation: fly-across-4 28s linear infinite;
+  animation-delay: -5s;
+}
+
+.animate-fly-5 {
+  animation: fly-across-5 22s linear infinite;
+  animation-delay: -12s;
+}
+
+.animate-fly-6 {
+  animation: fly-across-6 26s linear infinite;
+  animation-delay: -18s;
+}
+
 /* Mobile optimizations for better performance */
 @media screen and (max-width: 768px) {
   /* Disable expensive animations on mobile */
@@ -268,7 +375,10 @@ body {
   .animate-slow-bounce,
   .animate-fly-1,
   .animate-fly-2,
-  .animate-fly-3 {
+  .animate-fly-3,
+  .animate-fly-4,
+  .animate-fly-5,
+  .animate-fly-6 {
     animation: none !important;
   }
 

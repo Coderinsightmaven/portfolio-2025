@@ -89,7 +89,7 @@ export default function RootLayout({
         
         {/* Falling Stars Background - Optimized, decorative only */}
         <div className="stars" role="presentation">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(15)].map((_, i) => (
             <div key={i} className="star" data-star-index={i} role="presentation"></div>
           ))}
         </div>
