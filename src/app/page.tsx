@@ -5,6 +5,7 @@ import { AnimatedButton } from "@/components/AnimatedButton";
 import { Pattern } from "@/components/pattern";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import { SectionHeader } from "@/components/SectionHeader";
+import { PatternedBackground } from "@/components/background";
 
 import ServiceCards from "@/components/ServiceCards";
 
@@ -131,7 +132,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Falling Stars Background */}
+        {/* Flying Airplanes Background */}
+        <PatternedBackground />
 
 
         <div className="relative w-full px-4 sm:px-6 lg:px-8 z-10 text-center">
