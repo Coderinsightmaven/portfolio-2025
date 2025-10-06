@@ -6,16 +6,19 @@ interface AnimatedButtonProps {
   href: string;
   children: React.ReactNode;
   variant?: "primary" | "secondary";
+  onClick?: () => void;
+  className?: string;
 }
 
-export const AnimatedButton = ({ href, children, variant = "primary" }: AnimatedButtonProps) => {
+export const AnimatedButton = ({ href, children, variant = "primary", onClick, className }: AnimatedButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   if (variant === "primary") {
     return (
       <a
         href={href}
-        className="relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm text-white overflow-hidden group min-w-[140px]"
+        onClick={onClick}
+        className={`relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm text-white overflow-hidden group min-w-[140px] ${className || ''}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -47,7 +50,8 @@ export const AnimatedButton = ({ href, children, variant = "primary" }: Animated
   return (
     <a
       href={href}
-      className="relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm text-gray-700 overflow-hidden group bg-white border-2 border-gray-200 min-w-[150px]"
+      onClick={onClick}
+      className={`relative inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full font-medium text-sm text-gray-700 overflow-hidden group bg-white border-2 border-gray-200 min-w-[150px] ${className || ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
