@@ -130,7 +130,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24">
+      <section className="relative min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-16 sm:pb-20 md:pb-24 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0">
           <div className="absolute top-10 left-4 sm:top-20 sm:left-10 w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
           <div className="absolute top-20 right-4 sm:top-40 sm:right-10 w-32 h-32 sm:w-48 sm:h-48 md:w-72 md:h-72 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
@@ -176,9 +176,9 @@ export default function Home() {
       {/* Projects Showcase */}
       <section
         id="projects"
-        className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-white border-t border-gray-100"
+        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100"
       >
-        <div className="relative w-full px-4 sm:px-6 lg:px-12 ">
+        <div className="relative w-full px-4 sm:px-6 lg:px-12">
           <div className="flex justify-center">
             <SectionHeader
               badge="💼 Portfolio"
@@ -191,12 +191,11 @@ export default function Home() {
         </div>
       </section>
       {/* Services Section */}
-      <section className="relative bg-gradient-to-b from-gray-900 to-gray-800 border-t border-gray-700 flex justify-center">
+      <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-gray-900 to-gray-800 border-t border-gray-700 flex justify-center">
         <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12">
           <div className="flex justify-center mb-12 sm:mb-16">
             <div className="text-center max-w-4xl p-4">
               <SectionHeader
-                badge="⚡ Services"
                 title="What I Offer"
                 subtitle="Comprehensive web development services tailored to your needs"
               />
@@ -213,7 +212,7 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 overflow-hidden border-t border-cyan-400/30"
+        className="relative py-20 sm:py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-cyan-600 to-teal-600 overflow-hidden border-t border-cyan-400/30"
       >
         <Pattern variant="waves" className="text-white opacity-10" />
 
@@ -245,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-16 sm:py-20 md:py-24 bg-gray-900 text-white border-t border-gray-700">
+      <footer className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white border-t border-gray-700">
         <Pattern variant="grid" className="text-white opacity-5" />
         <div className="relative w-full px-4 sm:px-6 text-center z-10">
           <p className="text-sm sm:text-base text-gray-400">
