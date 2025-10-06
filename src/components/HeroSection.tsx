@@ -54,9 +54,7 @@ const TypewriterText = () => {
   const titles = [
     '💻 Full-Stack Developer',
     '🎨 UI/UX Designer',
-    '🔗 API Designer',
-    '⚛️ React Specialist',
-    '▲ Next.js Technologies',
+
   ];
 
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
