@@ -1,20 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
+import dynamic from "next/dynamic";
 import { AnimatedButton } from "@/components/AnimatedButton";
-import { Pattern } from "@/components/pattern";
-import ProjectCarousel from "@/components/ProjectCarousel";
 import { SectionHeader } from "@/components/SectionHeader";
-import { PatternedBackground } from "@/components/background";
-import ModernNavbar from "@/components/ModernNavbar";
 
-import ServiceCards from "@/components/ServiceCards";
+// Lazy load non-critical components for better performance
+const ModernNavbar = dynamic(() => import("@/components/ModernNavbar"), {
+  ssr: true,
+});
+
+const PatternedBackground = dynamic(() => import("@/components/background").then(mod => mod.PatternedBackground), {
+  ssr: false,
+});
+
+const ProjectCarousel = lazy(() => import("@/components/ProjectCarousel"));
+const ServiceCards = lazy(() => import("@/components/ServiceCards"));
+const Pattern = lazy(() => import("@/components/pattern").then(mod => ({ default: mod.Pattern })));
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    // Immediate animation on mobile for faster LCP, slight delay on desktop
+    const isMobile = window.innerWidth < 768;
+    const delay = isMobile ? 0 : 100;
+    const timer = setTimeout(() => setIsVisible(true), delay);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -23,8 +35,8 @@ export default function Home() {
       <ModernNavbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Flying Airplanes Background */}
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Flying Airplanes Background - Hidden on mobile via CSS */}
         <PatternedBackground />
 
         <div className="relative w-full px-4 sm:px-6 lg:px-8 z-10 text-center">
@@ -105,7 +117,9 @@ export default function Home() {
             />
           </div>
 
-          <ProjectCarousel />
+          <Suspense fallback={<div className="flex justify-center items-center py-20"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div></div>}>
+            <ProjectCarousel />
+          </Suspense>
         </div>
       </section>
       {/* Services Section */}
@@ -120,7 +134,9 @@ export default function Home() {
             </div>
           </div>
           <div className="flex justify-center">
-            <ServiceCards />
+            <Suspense fallback={<div className="flex justify-center items-center py-20"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div></div>}>
+              <ServiceCards />
+            </Suspense>
           </div>
         </div>
       </section>
@@ -132,15 +148,17 @@ export default function Home() {
         id="contact"
         className="relative py-20 sm:py-24 md:py-32 lg:py-40 overflow-hidden border-t border-cyan-400/30"
       >
-        <Pattern variant="waves" className="text-white opacity-10" />
+        <Suspense fallback={null}>
+          <Pattern variant="waves" className="text-white opacity-10" />
+        </Suspense>
 
         <div className="relative w-full px-4 sm:px-6 lg:px-8 text-center z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">
-            Let's Create Something Amazing Together
-          </h2>\
+            Let&apos;s Create Something Amazing Together
+          </h2>
           <div className="flex justify-center">
           <p className="text-base sm:text-lg md:text-xl text-white/90 mb-8 sm:mb-10 max-w-4xl mx-auto">
-            Ready to bring your vision to life? Let's discuss your project and
+            Ready to bring your vision to life? Let&apos;s discuss your project and
             create something extraordinary together.
           </p>
           </div>
@@ -163,7 +181,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="relative py-16 sm:py-20 md:py-24 text-white border-t border-gray-700">
-        <Pattern variant="grid" className="text-white opacity-5" />
+        <Suspense fallback={null}>
+          <Pattern variant="grid" className="text-white opacity-5" />
+        </Suspense>
         <div className="relative w-full px-4 sm:px-6 lg:px-8 text-center z-10">
           <p className="text-sm sm:text-base text-gray-400">
             © 2024 LM. Built with Next.js, Tailwind CSS, and ❤️

@@ -1,0 +1,17 @@
+{
+  "name": "Liam's Portfolio - Full Stack Developer",
+  "short_name": "Liam Portfolio",
+  "description": "Creative full-stack developer specializing in modern web technologies, responsive design, and innovative digital solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0d13",
+  "theme_color": "#00ffff",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
+

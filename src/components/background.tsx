@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from 'react';
+
 const RocketShip = () => {
   // Generate 33 engine positions evenly spaced across the rocket bottom
   const engines = [];
@@ -108,6 +110,24 @@ const FlyingAirplanes = () => {
 };
 
 export const PatternedBackground = () => {
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    
+    checkIsDesktop();
+    window.addEventListener('resize', checkIsDesktop);
+    
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
+
+  // Don't render on mobile
+  if (!isDesktop) {
+    return null;
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <FlyingAirplanes />
