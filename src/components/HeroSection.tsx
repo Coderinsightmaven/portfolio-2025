@@ -5,6 +5,8 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const RocketShip = () => {
+  const [key, setKey] = useState(0);
+
   // Generate 33 engine positions evenly spaced across the rocket bottom
   const engines = [];
   const startX = 8.5;
@@ -22,9 +24,30 @@ const RocketShip = () => {
     );
   }
 
+  useEffect(() => {
+    // Launch rocket every 25 seconds
+    const interval = setInterval(() => {
+      setKey(prev => prev + 1);
+    }, 25000);
+
+    // Initial launch after 2 seconds
+    const initialTimeout = setTimeout(() => {
+      setKey(prev => prev + 1);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(initialTimeout);
+    };
+  }, []);
+
   return (
-    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-80 z-10">
-      <div className="animate-rocket-launch">
+    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-80 z-0 pointer-events-none">
+      <div 
+        key={key}
+        className="animate-rocket-launch"
+        style={{ transform: 'translateY(120vh)' }}
+      >
         <svg
           width="80"
           height="120"
@@ -116,7 +139,7 @@ export default function NewHeroSection() {
   }
 
   return (
-    <div className="">
+    <div className="relative overflow-hidden">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">

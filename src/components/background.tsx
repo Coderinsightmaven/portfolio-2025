@@ -2,53 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-const RocketShip = () => {
-  // Generate 33 engine positions evenly spaced across the rocket bottom
-  const engines = [];
-  const startX = 8.5;
-  const endX = 15.5;
-  const numEngines = 33;
-
-  for (let i = 0; i < numEngines; i++) {
-    const x = startX + (i * (endX - startX) / (numEngines - 1));
-    engines.push(
-      <g key={i}>
-        <ellipse cx={x} cy="34" rx="0.3" ry="1" fill="#ff6b35"/>
-        <ellipse cx={x} cy="33" rx="0.2" ry="0.7" fill="#ff4500"/>
-        <ellipse cx={x} cy="32" rx="0.15" ry="0.4" fill="#ffffff"/>
-      </g>
-    );
-  }
-
-  return (
-    <div className="absolute opacity-80 w-full flex justify-center">
-      {/* Rocket Ship */}
-      <div className="animate-rocket-launch">
-        <svg
-          width="80"
-          height="120"
-          viewBox="0 0 24 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-orange-400 drop-shadow-lg"
-        >
-          {/* Rocket Body */}
-          <rect x="8" y="12" width="8" height="20" fill="currentColor" rx="2"/>
-          {/* Rocket Nose */}
-          <polygon points="12,8 8,12 16,12" fill="currentColor"/>
-          {/* Rocket Fins */}
-          <polygon points="6,28 8,32 8,28" fill="currentColor"/>
-          <polygon points="16,28 16,32 18,28" fill="currentColor"/>
-          {/* Rocket Window */}
-          <circle cx="12" cy="18" r="2" fill="#ffffff" opacity="0.8"/>
-          {/* 33 Engine Flames */}
-          {engines}
-        </svg>
-      </div>
-    </div>
-  );
-};
-
 const FlyingAirplanes = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -102,9 +55,6 @@ const FlyingAirplanes = () => {
           />
         </svg>
       </div>
-
-      {/* Rocket Ship with integrated smoke trails */}
-      <RocketShip />
     </div>
   );
 };
