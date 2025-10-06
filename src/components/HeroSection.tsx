@@ -65,20 +65,21 @@ const RocketShip = () => {
   );
 };
 
-const TypewriterText = () => {
-  const titles = [
-    "💻 Full-Stack Developer",
-    "🎨 UI/UX Designer",
-    "🚀 Performance Optimizer",
-    "🔍 SEO Optimizer",
-    "💡 Creative Thinker",
-    "🤝 Problem Solver",
-    "🔥 Passionate Developer",
-    "💬 Communicator",
-    "🎯 Goal-Oriented",
-    "💪 Hardworker",
-  ];
+// Move titles outside component to avoid re-creating on every render
+const titles = [
+  "💻 Full-Stack Developer",
+  "🎨 UI/UX Designer",
+  "🚀 Performance Optimizer",
+  "🔍 SEO Optimizer",
+  "💡 Creative Thinker",
+  "🤝 Problem Solver",
+  "🔥 Passionate Developer",
+  "💬 Communicator",
+  "🎯 Goal-Oriented",
+  "💪 Hardworker",
+];
 
+const TypewriterText = () => {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -159,7 +160,7 @@ export default function NewHeroSection() {
               </span>
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              From First Click to Lasting Impression—Let's Bring Your Vision to
+              From First Click to Lasting Impression—Let&apos;s Bring Your Vision to
               Life
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
