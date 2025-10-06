@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
@@ -47,6 +47,57 @@ const RocketShip = () => {
         </svg>
       </div>
     </div>
+  );
+};
+
+const TypewriterText = () => {
+  const titles = [
+    '💻 Full-Stack Developer',
+    '🎨 UI/UX Designer',
+    '🔗 API Designer',
+    '⚛️ React Specialist',
+    '▲ Next.js Technologies',
+  ];
+
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentTitle = titles[currentTitleIndex];
+    const typeSpeed = 100; // ms per character
+    const deleteSpeed = 50; // ms per character when deleting
+    const pauseTime = 2000; // ms to pause at full text
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing phase
+        if (displayText.length < currentTitle.length) {
+          setDisplayText(currentTitle.slice(0, displayText.length + 1));
+        } else {
+          // Finished typing, start deleting after pause
+          setTimeout(() => setIsDeleting(true), pauseTime);
+        }
+      } else {
+        // Deleting phase
+        if (displayText.length > 0) {
+          setDisplayText(displayText.slice(0, -1));
+        } else {
+          // Finished deleting, move to next title
+          setIsDeleting(false);
+          setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+        }
+      }
+    }, isDeleting ? deleteSpeed : typeSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, currentTitleIndex, titles]);
+
+  return (
+    <span className="inline-block min-w-0">
+      {displayText}
+      <span className="animate-pulse">|</span>
+    </span>
   );
 };
 
@@ -166,7 +217,7 @@ export default function NewHeroSection() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-gray-400 dark:ring-white/10 dark:hover:ring-white/20">
-              ✨ Full-Stack Developer & UI/UX Designer
+              <TypewriterText />
               <button
                 onClick={() => scrollToSection('#projects')}
                 className="font-semibold text-indigo-600 dark:text-indigo-400 ml-2"
