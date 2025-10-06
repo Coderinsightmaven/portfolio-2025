@@ -151,7 +151,7 @@ export default function NewHeroSection() {
           </div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              Designing Websites
+              Designing Website
               <br />
               Experiences That
               <br />
