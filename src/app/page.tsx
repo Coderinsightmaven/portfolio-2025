@@ -309,46 +309,74 @@ export default function Home() {
       <div className="h-16 sm:h-20 md:h-24 lg:h-32"></div>
 
       {/* Services Section */}
-      <section className="relative py-20 sm:py-24 md:py-32 lg:py-40 bg-gradient-to-b from-white to-blue-50/30 border-t border-blue-100">
-        <div className="relative w-full px-4 sm:px-6 lg:px-12 text-center">
-          <div className="flex justify-center">
-            <SectionHeader
-              badge="⚡ Services"
-              title="What I Offer"
-              subtitle="Comprehensive web development services tailored to your needs"
-            />
+      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-blue-50/30 border-t border-blue-100 flex justify-center">
+        <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-12">
+          <div className="flex justify-center mb-12 sm:mb-16">
+            <div className="text-center max-w-4xl">
+              <SectionHeader
+                badge="⚡ Services"
+                title="What I Offer"
+                subtitle="Comprehensive web development services tailored to your needs"
+              />
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <FeatureCard
-              icon="💻"
-              title="Web Development"
-              description="Custom websites built with modern technologies and best practices for optimal performance and user experience."
-            />
-            <FeatureCard
-              icon="🎨"
-              title="UI/UX Design"
-              description="Beautiful, intuitive interfaces designed with your users in mind, ensuring engagement and conversion."
-            />
-            <FeatureCard
-              icon="📱"
-              title="Responsive Design"
-              description="Pixel-perfect designs that work flawlessly across all devices and screen sizes."
-            />
-            <FeatureCard
-              icon="⚡"
-              title="Performance"
-              description="Lightning-fast load times and optimized code for the best possible user experience."
-            />
-            <FeatureCard
-              icon="🔧"
-              title="Maintenance"
-              description="Ongoing support and updates to keep your website secure, fast, and up-to-date."
-            />
-            <FeatureCard
-              icon="🚀"
-              title="SEO Optimization"
-              description="Search engine optimization to help your website rank higher and attract more visitors."
-            />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16">
+            {/* Development Services */}
+            <div className="space-y-6 sm:space-y-8">
+              <div className="text-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Development</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+              </div>
+
+              <div className="space-y-6 sm:space-y-8">
+                <FeatureCard
+                  icon="💻"
+                  title="Web Development"
+                  description="Custom websites built with modern technologies and best practices for optimal performance and user experience."
+                />
+
+                <FeatureCard
+                  icon="📱"
+                  title="Responsive Design"
+                  description="Pixel-perfect designs that work flawlessly across all devices and screen sizes."
+                />
+
+                <FeatureCard
+                  icon="⚡"
+                  title="Performance"
+                  description="Lightning-fast load times and optimized code for the best possible user experience."
+                />
+              </div>
+            </div>
+
+            {/* Design & Optimization Services */}
+            <div className="space-y-6 sm:space-y-8">
+              <div className="text-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">Design & Optimization</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-teal-500 mx-auto rounded-full"></div>
+              </div>
+
+              <div className="space-y-6 sm:space-y-8">
+                <FeatureCard
+                  icon="🎨"
+                  title="UI/UX Design"
+                  description="Beautiful, intuitive interfaces designed with your users in mind, ensuring engagement and conversion."
+                />
+
+                <FeatureCard
+                  icon="🔧"
+                  title="Maintenance"
+                  description="Ongoing support and updates to keep your website secure, fast, and up-to-date."
+                />
+
+                <FeatureCard
+                  icon="🚀"
+                  title="SEO Optimization"
+                  description="Search engine optimization to help your website rank higher and attract more visitors."
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
