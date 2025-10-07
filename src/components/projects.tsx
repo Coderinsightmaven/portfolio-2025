@@ -9,7 +9,7 @@ const posts = [
       description:
         'Live Data Integration, for Ioncourt a scoring application for ITA Tennis Tournaments built with Tauri v2, Vite, Tailwind, Typescript, and Rust',
       imageUrl:
-        '/tempuzscoreboard2.png',
+        '/Code.png',
       date: 'Sept 25th, 2025',
       datetime: '2025-09-25',
     },
@@ -44,7 +44,7 @@ const posts = [
                 key={post.id}
                 className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pt-80 pb-8 sm:pt-48 lg:pt-80 dark:bg-gray-800"
               >
-                <Image alt="" src={post.imageUrl} fill className="absolute inset-0 -z-10 object-contain" />
+                <Image alt="" src={post.imageUrl} fill className="absolute inset-0 -z-10 object-cover" />
                 <div className="absolute inset-0 -z-10 bg-linear-to-t from-gray-900 via-gray-900/40 dark:from-black/80 dark:via-black/40" />
                 <div className="absolute inset-0 -z-10 rounded-2xl inset-ring inset-ring-gray-900/10 dark:inset-ring-white/10" />
   
