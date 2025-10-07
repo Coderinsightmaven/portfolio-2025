@@ -150,18 +150,17 @@ export default function NewHeroSection() {
             </div>
           </div>
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
+            <h1 className="text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
               From Curiosity to Code
               <br />
-              Building Digital
-              <br />
+              Crafting Meaningful <br />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Solutions That Inspire
+                Software That Empowers
               </span>
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              Fueled by creativity, logic, and endless curiosity to make ideas
-              come alive.
+              Self-taught and driven by curiosity, I build thoughtful, scalable
+              solutions that turn ideas into impact.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
