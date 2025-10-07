@@ -126,8 +126,8 @@ export default function FixedNavigation() {
         </DialogPanel>
       </Dialog>
       
-      {/* Menu Button - Bottom Right Corner (All Screens) */}
-      <div className="fixed bottom-6 right-6" style={{ zIndex: 9999 }}>
+      {/* Menu Button - Bottom Right Corner (Mobile Only) */}
+      <div className="fixed bottom-6 right-6 lg:hidden" style={{ zIndex: 9999 }}>
         <button
           type="button"
           onClick={() => setMobileMenuOpen(true)}
