@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { XMarkIcon, ChevronDownIcon } from '@heroicons/react/16/solid';
 
@@ -9,6 +10,53 @@ interface ContactFormProps {
 }
 
 export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      firstName: formData.get('first-name'),
+      lastName: formData.get('last-name'),
+      company: formData.get('company'),
+      email: formData.get('email'),
+      phoneNumber: formData.get('phone-number'),
+      country: formData.get('country'),
+      message: formData.get('message'),
+    };
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        form.reset();
+        setTimeout(() => {
+          onClose();
+          setSubmitStatus('idle');
+        }, 2000);
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-[10000]">
       {/* Backdrop */}
@@ -51,7 +99,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
               </p>
             </div>
 
-            <form action="#" method="POST" className="mx-auto max-w-xl">
+            <form onSubmit={handleSubmit} className="mx-auto max-w-xl">
               <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div>
                   <label htmlFor="first-name" className="block text-sm/6 font-semibold text-gray-900 dark:text-white">
@@ -179,11 +227,28 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                 </div>
               </div>
               <div className="mt-10">
+                {submitStatus === 'success' && (
+                  <div className="mb-4 rounded-md bg-green-50 dark:bg-green-900/20 p-4">
+                    <p className="text-sm font-medium text-green-800 dark:text-green-200">
+                      ✓ Message sent successfully! I&apos;ll get back to you soon.
+                    </p>
+                  </div>
+                )}
+                
+                {submitStatus === 'error' && (
+                  <div className="mb-4 rounded-md bg-red-50 dark:bg-red-900/20 p-4">
+                    <p className="text-sm font-medium text-red-800 dark:text-red-200">
+                      ✗ Failed to send message. Please try again or email me directly.
+                    </p>
+                  </div>
+                )}
+                
                 <button
                   type="submit"
-                  className="block w-full rounded-md bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600 transition-shadow"
+                  disabled={isSubmitting}
+                  className="block w-full rounded-md bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600 transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Let&apos;s talk
+                  {isSubmitting ? 'Sending...' : 'Let\'s talk'}
                 </button>
               </div>
             </form>

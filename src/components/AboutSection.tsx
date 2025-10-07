@@ -61,7 +61,7 @@ export default function AboutSection() {
                 </svg>
                 <blockquote className="mt-6 text-xl/8 font-semibold text-white">
                   <p>
-                    "Passionate about creating elegant solutions to complex problems. Always learning, always building."
+                    &ldquo;Passionate about creating elegant solutions to complex problems. Always learning, always building.&rdquo;
                   </p>
                 </blockquote>
                 <figcaption className="mt-6 text-sm/6 text-gray-300">
@@ -81,10 +81,10 @@ export default function AboutSection() {
               </h1>
               <div className="max-w-xl">
                 <p className="mt-6">
-                My journey into software development started in my early teens with my first laptop—a beat-up, second-hand device that opened up endless possibilities. Without teachers, I dove in, tinkering with basic programs and online coding lessons. That thrill of turning ideas into working apps hooked me, revealing code's logical creativity.
+                My journey into software development started in my early teens with my first laptop—a beat-up, second-hand device that opened up endless possibilities. Without teachers, I dove in, tinkering with basic programs and online coding lessons. That thrill of turning ideas into working apps hooked me, revealing code&apos;s logical creativity.
                 </p>
                 <p className="mt-8">
-                As years passed, my passion grew, leading me to build computers from parts for running complex code and simulations. This revealed software's power to create meaningful systems & programs. I explored languages and frameworks through self-guided projects like automation scripts, learning via trial and error how code handles data and how to innovate.
+                As years passed, my passion grew, leading me to build computers from parts for running complex code and simulations. This revealed software&apos;s power to create meaningful systems & programs. I explored languages and frameworks through self-guided projects like automation scripts, learning via trial and error how code handles data and how to innovate.
                 </p>
                 <p className="mt-8">
                 Today, this foundation drives my software career, where I craft scalable apps to solve challenges. I thrive on lifelong learning, turning problems into efficient solutions. Always looking for new challenges & opportunities to grow.
@@ -163,7 +163,7 @@ export default function AboutSection() {
 }
 
 // Helper icon component (if ServerIcon is not available)
-function ServerIcon({ className, ...props }: { className?: string; [key: string]: any }) {
+function ServerIcon({ className, ...props }: { className?: string; [key: string]: unknown }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -115,7 +115,7 @@ const TypewriterText = () => {
     );
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentTitleIndex, titles]);
+  }, [displayText, isDeleting, currentTitleIndex]);
 
   return (
     <span className="inline-block min-w-0">
@@ -165,14 +165,8 @@ export default function NewHeroSection() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
-                onClick={() => scrollToSection("#contact")}
-                className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500"
-              >
-                Start Your Project
-              </button>
-              <button
                 onClick={() => scrollToSection("#projects")}
-                className="text-sm/6 font-semibold text-gray-900 dark:text-white hover:text-cyan-400 transition-colors"
+                className="text-sm/6 font-semibold text-gray-900 dark:text-white hover:text-cyan-400 transition-colors border border-gray-900 dark:border-white hover:border-cyan-400 rounded-full px-4 py-2"
               >
                 Explore Work <span aria-hidden="true">→</span>
               </button>
