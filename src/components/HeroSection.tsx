@@ -151,17 +151,17 @@ export default function NewHeroSection() {
           </div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              Designing Website
+              From Curiosity to Code
               <br />
-              Experiences That
+              Building Digital
               <br />
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Delight & Excite
+                Solutions That Inspire
               </span>
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              From First Click to Lasting Impression—Let&apos;s Bring Your Vision to
-              Life
+              Fueled by creativity, logic, and endless curiosity to make ideas
+              come alive.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button
