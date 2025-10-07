@@ -131,10 +131,10 @@ export default function FixedNavigation() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(true)}
-          className="inline-flex items-center justify-center rounded-full p-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white shadow-lg hover:shadow-xl transition-shadow"
+          className="text-white"
         >
           <span className="sr-only">Open main menu</span>
-          <Bars3Icon aria-hidden="true" className="size-6" />
+          <Bars3Icon aria-hidden="true" className="size-8" />
         </button>
       </div>
 
