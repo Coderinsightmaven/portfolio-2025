@@ -34,6 +34,13 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+    ],
+    apple: '/favicon.svg',
+  },
   metadataBase: new URL('https://www.liamm.me'), // Update this with your actual domain
   alternates: {
     canonical: '/',
