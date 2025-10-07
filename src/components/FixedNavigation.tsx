@@ -3,21 +3,29 @@
 import { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import ContactForm from './ContactForm';
 
 const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'Projects', href: '#projects' },
   { name: 'About', href: '#about' },
-  { name: 'Contact', href: '#contact' },
 ];
 
 export default function FixedNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [contactFormOpen, setContactFormOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.slice(1));
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offset = 80; // Offset for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -55,21 +63,13 @@ export default function FixedNavigation() {
             </button>
           ))}
         </div>
-        <div className="flex flex-1 justify-end items-center">
-          {/* Moon Icon */}
-          <svg
-            width="60"
-            height="60"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-yellow-200 drop-shadow-xl"
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <button
+            onClick={() => setContactFormOpen(true)}
+            className="text-sm/6 font-semibold text-gray-900 dark:text-white hover:text-cyan-400 transition-colors"
           >
-            <circle cx="12" cy="12" r="10" fill="currentColor" opacity="0.9"/>
-            <circle cx="8" cy="8" r="2" fill="#ffffff" opacity="0.6"/>
-            <circle cx="14" cy="10" r="1.5" fill="#ffffff" opacity="0.4"/>
-            <circle cx="10" cy="14" r="1" fill="#ffffff" opacity="0.3"/>
-          </svg>
+            Get in Touch <span aria-hidden="true">→</span>
+          </button>
         </div>
       </nav>
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -113,8 +113,8 @@ export default function FixedNavigation() {
               <div className="py-6">
                 <button
                   onClick={() => {
-                    scrollToSection('#contact');
                     setMobileMenuOpen(false);
+                    setContactFormOpen(true);
                   }}
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 dark:text-white dark:hover:bg-white/5 w-full text-left"
                 >
@@ -137,6 +137,9 @@ export default function FixedNavigation() {
           <Bars3Icon aria-hidden="true" className="size-6" />
         </button>
       </div>
+
+      {/* Contact Form Modal */}
+      <ContactForm isOpen={contactFormOpen} onClose={() => setContactFormOpen(false)} />
     </header>
   );
 }

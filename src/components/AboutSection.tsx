@@ -1,37 +1,33 @@
 'use client';
 
+import Image from 'next/image';
 import { AcademicCapIcon, CodeBracketIcon, SparklesIcon } from '@heroicons/react/20/solid';
 
 const skills = [
   {
     icon: CodeBracketIcon,
     title: 'Frontend Development',
-    description: 'React, Next.js, TypeScript, Tailwind CSS, and modern JavaScript frameworks. Building responsive and performant user interfaces.'
+    description: 'HTML, CSS, JavaScript, React.js, Next.js, and modern responsive design. Building interactive and performant user interfaces with focus on user experience and accessibility.'
   },
   {
     icon: ServerIcon,
     title: 'Backend Development',
-    description: 'Node.js, API design, database management, and server-side architecture. Creating scalable and secure backend solutions.'
+    description: 'Node.js, Express.js for RESTful APIs, MySQL and MongoDB for database management. Creating scalable server-side applications with efficient data handling.'
   },
   {
     icon: SparklesIcon,
-    title: 'Best Practices',
-    description: 'Version control with Git, agile methodologies, testing, and continuous integration. Committed to writing maintainable and well-documented code.'
+    title: 'Full-Stack Development',
+    description: 'JSON data structures, API integration, authentication, and deployment. Experienced in building complete web applications from concept to production with modern development workflows.'
   },
 ];
 
 const education = [
   {
-    degree: 'Bachelor of Science in Computer Science',
-    institution: 'University Name',
-    years: 'Year - Year',
-    description: 'Focused on software engineering, algorithms, and data structures. Completed coursework in web development, databases, and computer systems.'
-  },
-  {
-    degree: 'Additional Certifications & Training',
-    institution: 'Various Platforms',
-    years: 'Ongoing',
-    description: 'Continuous learning through online courses, bootcamps, and professional development programs in modern web technologies and software development practices.'
+    degree: 'Full-Stack Web Development Certificate',
+    institution: 'University of Denver',
+    years: '2023',
+    description: 'Intensive full-stack development program covering front-end technologies (HTML, CSS, JavaScript, React.js) and back-end technologies (Node.js, Express.js, MySQL, MongoDB). Collaborated on team-based projects with demanding deadlines to build full-stack web applications.',
+    link: 'https://www.credly.com/badges/0a0d890f-6789-43e2-9827-01c273bf84fa/public_url' // Replace with your actual Credly badge URL
   },
 ];
 
@@ -43,25 +39,13 @@ export default function AboutSection() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           {/* Left Column - Image Card */}
           <div className="lg:pr-4">
-            <div className="relative overflow-hidden rounded-3xl bg-gray-900 px-6 pt-64 pb-9 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10 dark:bg-gray-800 dark:shadow-none dark:after:pointer-events-none dark:after:absolute dark:after:inset-0 dark:after:rounded-3xl dark:after:inset-ring dark:after:inset-ring-white/10">
-              <img
+            <div className="relative overflow-hidden rounded-3xl bg-gray-900 px-6 pt-64 pb-9 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10 dark:bg-gray-800">
+              <Image
                 alt="Professional workspace"
-                src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=2669&q=80"
-                className="absolute inset-0 size-full rounded-3xl object-cover brightness-125 saturate-0"
+                src="/Liam.jpg"
+                fill
+                className="rounded-3xl object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gray-900 mix-blend-multiply" />
-              <div
-                aria-hidden="true"
-                className="absolute top-1/2 left-1/2 -ml-16 -translate-x-1/2 -translate-y-1/2 transform-gpu blur-3xl"
-              >
-                <div
-                  style={{
-                    clipPath:
-                      'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-                  }}
-                  className="aspect-[1097/845] w-[68.5625rem] bg-gradient-to-tr from-cyan-400 to-purple-500 opacity-40"
-                />
-              </div>
               <figure className="relative isolate">
                 <svg
                   fill="none"
@@ -97,18 +81,13 @@ export default function AboutSection() {
               </h1>
               <div className="max-w-xl">
                 <p className="mt-6">
-                  I&apos;m a passionate developer dedicated to creating innovative solutions and crafting exceptional user experiences. 
-                  With a strong foundation in modern web technologies and a continuous drive to learn and grow.
+                My journey into software development started in my early teens with my first laptop—a beat-up, second-hand device that opened up endless possibilities. Without teachers, I dove in, tinkering with basic programs and online coding lessons. That thrill of turning ideas into working apps hooked me, revealing code's logical creativity.
                 </p>
                 <p className="mt-8">
-                  My journey in software development has been driven by curiosity and a passion for problem-solving. 
-                  I believe in writing clean, maintainable code and creating applications that not only work well but 
-                  also provide delightful user experiences.
+                As years passed, my passion grew, leading me to build computers from parts for running complex code and simulations. This revealed software's power to create meaningful systems & programs. I explored languages and frameworks through self-guided projects like automation scripts, learning via trial and error how code handles data and how to innovate.
                 </p>
                 <p className="mt-8">
-                  I&apos;m constantly exploring new technologies and best practices to stay at the forefront of web development. 
-                  Whether it&apos;s building from scratch or improving existing systems, I bring dedication, creativity, 
-                  and technical expertise to every project I work on.
+                Today, this foundation drives my software career, where I craft scalable apps to solve challenges. I thrive on lifelong learning, turning problems into efficient solutions. Always looking for new challenges & opportunities to grow.
                 </p>
               </div>
             </div>
@@ -161,6 +140,16 @@ export default function AboutSection() {
                       <p className="mt-2 text-gray-600 dark:text-gray-400">
                         {edu.description}
                       </p>
+                      {edu.link && (
+                        <a
+                          href={edu.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 inline-flex items-center text-sm font-semibold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 dark:hover:text-cyan-300"
+                        >
+                          View Certificate →
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
