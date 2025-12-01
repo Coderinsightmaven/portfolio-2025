@@ -1,113 +1,45 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 
-const RocketShip = () => {
-  const [key, setKey] = useState(1);
+const roles = [
+  "Full-Stack Developer",
+  "UI/UX Enthusiast",
+  "Problem Solver",
+  "Creative Technologist",
+];
 
-  // Generate 33 engine positions evenly spaced across the rocket bottom
-  const engines = [];
-  const startX = 8.5;
-  const endX = 15.5;
-  const numEngines = 33;
-
-  for (let i = 0; i < numEngines; i++) {
-    const x = startX + (i * (endX - startX)) / (numEngines - 1);
-    engines.push(
-      <g key={i}>
-        <ellipse cx={x} cy="34" rx="0.3" ry="1" fill="#ff6b35" />
-        <ellipse cx={x} cy="33" rx="0.2" ry="0.7" fill="#ff4500" />
-        <ellipse cx={x} cy="32" rx="0.15" ry="0.4" fill="#ffffff" />
-      </g>
-    );
-  }
-
-  useEffect(() => {
-    // Launch rocket every 25 seconds
-    const interval = setInterval(() => {
-      setKey((prev) => prev + 1);
-    }, 25000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  return (
-    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 opacity-80 z-0 pointer-events-none">
-      <div
-        key={key}
-        className="animate-rocket-launch"
-        style={{ transform: "translateY(120vh)" }}
-      >
-        <svg
-          width="80"
-          height="120"
-          viewBox="0 0 24 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-orange-400 drop-shadow-lg"
-        >
-          {/* Rocket Body */}
-          <rect x="8" y="12" width="8" height="20" fill="currentColor" rx="2" />
-          {/* Rocket Nose */}
-          <polygon points="12,8 8,12 16,12" fill="currentColor" />
-          {/* Rocket Fins */}
-          <polygon points="6,28 8,32 8,28" fill="currentColor" />
-          <polygon points="16,28 16,32 18,28" fill="currentColor" />
-          {/* Rocket Window */}
-          <circle cx="12" cy="18" r="2" fill="#ffffff" opacity="0.8" />
-          {/* 33 Engine Flames */}
-          {engines}
-        </svg>
-      </div>
-    </div>
-  );
-};
-
-// Move titles outside component to avoid re-creating on every render
-const titles = [
-  "💻 Full-Stack Developer",
-  "🎨 UI/UX Designer",
-  "🚀 Performance Optimizer",
-  "🔍 SEO Optimizer",
-  "💡 Creative Thinker",
-  "🤝 Problem Solver",
-  "🔥 Passionate Developer",
-  "💬 Communicator",
-  "🎯 Goal-Oriented",
-  "💪 Hardworker",
+const highlights = [
+  { label: "Years Experience", value: "3+" },
+  { label: "Projects Completed", value: "20+" },
+  { label: "Technologies", value: "15+" },
 ];
 
 const TypewriterText = () => {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const currentTitle = titles[currentTitleIndex];
-    const typeSpeed = 100; // ms per character
-    const deleteSpeed = 50; // ms per character when deleting
-    const pauseTime = 5000; // ms to pause at full text
+    const currentRole = roles[currentIndex];
+    const typeSpeed = 80;
+    const deleteSpeed = 40;
+    const pauseTime = 3000;
 
     const timeout = setTimeout(
       () => {
         if (!isDeleting) {
-          // Typing phase
-          if (displayText.length < currentTitle.length) {
-            setDisplayText(currentTitle.slice(0, displayText.length + 1));
+          if (displayText.length < currentRole.length) {
+            setDisplayText(currentRole.slice(0, displayText.length + 1));
           } else {
-            // Finished typing, start deleting after pause
             setTimeout(() => setIsDeleting(true), pauseTime);
           }
         } else {
-          // Deleting phase
           if (displayText.length > 0) {
             setDisplayText(displayText.slice(0, -1));
           } else {
-            // Finished deleting, move to next title
             setIsDeleting(false);
-            setCurrentTitleIndex((prev) => (prev + 1) % titles.length);
+            setCurrentIndex((prev) => (prev + 1) % roles.length);
           }
         }
       },
@@ -115,65 +47,204 @@ const TypewriterText = () => {
     );
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentTitleIndex]);
+  }, [displayText, isDeleting, currentIndex]);
 
   return (
-    <span className="inline-block min-w-0">
-      {displayText}
-      <span className="animate-pulse">|</span>
+    <span className="inline-block">
+      <span className="text-[var(--neon-cyan)]">{displayText}</span>
+      <span className="animate-pulse text-[var(--neon-cyan)]">|</span>
     </span>
   );
 };
 
-export default function NewHeroSection() {
+const FloatingOrbs = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Large Cyan Orb */}
+      <div 
+        className="orb orb-cyan w-[500px] h-[500px] -top-20 -right-40 opacity-20"
+        style={{ animationDelay: '0s' }}
+      />
+      {/* Medium Purple Orb */}
+      <div 
+        className="orb orb-purple w-[400px] h-[400px] top-1/2 -left-60 opacity-15"
+        style={{ animationDelay: '-5s' }}
+      />
+      {/* Small Magenta Orb */}
+      <div 
+        className="orb orb-magenta w-[300px] h-[300px] bottom-20 right-20 opacity-10"
+        style={{ animationDelay: '-10s' }}
+      />
+    </div>
+  );
+};
+
+export default function HeroSection() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (heroRef.current) {
+        const rect = heroRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        });
+      }
+    };
+
+    const element = heroRef.current;
+    if (element) {
+      element.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      if (element) {
+        element.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.slice(1));
+    const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <div id="home" className="relative overflow-hidden">
-      <div className="relative isolate px-6 pt-14 lg:px-8">
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-gray-400 dark:ring-white/10 dark:hover:ring-white/20">
-              <TypewriterText />
-              <button
-                onClick={() => scrollToSection("#projects")}
-                className="font-semibold text-indigo-600 dark:text-indigo-400 ml-2"
-              >
-                <span aria-hidden="true" className="absolute inset-0" />
-                View Work <span aria-hidden="true">&rarr;</span>
-              </button>
-            </div>
-          </div>
-          <div className="text-center">
-            <h1 className="text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              From Curiosity to Code
-              <br />
-              Crafting Meaningful <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Software That Empowers
-              </span>
-            </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              Self-taught and driven by curiosity, I build thoughtful, scalable
-              solutions that turn ideas into impact.
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <button
-                onClick={() => scrollToSection("#projects")}
-                className="text-sm/6 font-semibold text-gray-900 dark:text-white hover:text-cyan-400 transition-colors border border-gray-900 dark:border-white hover:border-cyan-400 rounded-full px-4 py-2"
-              >
-                Explore Work <span aria-hidden="true">→</span>
-              </button>
-            </div>
+    <section 
+      id="home" 
+      ref={heroRef}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <FloatingOrbs />
+      
+      {/* Cursor Glow Effect */}
+      <div 
+        className="cursor-glow hidden md:block"
+        style={{
+          left: mousePosition.x,
+          top: mousePosition.y,
+          opacity: mousePosition.x > 0 ? 0.6 : 0,
+        }}
+      />
+
+      {/* Main Content */}
+      <div className="relative z-10 section-container text-center">
+        {/* Status Badge */}
+        <div className="animate-fade-in-down mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-tertiary)] border border-[var(--glass-border)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--neon-green)] opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--neon-green)]"></span>
+            </span>
+            <span className="text-sm text-[var(--text-secondary)]">Available for new opportunities</span>
           </div>
         </div>
+
+        {/* Role Badge */}
+        <div className="animate-fade-in-down delay-100 mb-6">
+          <div className="inline-block px-4 py-1.5 rounded-full border border-[var(--neon-cyan)]/30 bg-[var(--neon-cyan)]/5">
+            <TypewriterText />
+          </div>
+        </div>
+
+        {/* Main Headline */}
+        <h1 
+          className="animate-fade-in-up delay-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6"
+          style={{ fontFamily: 'var(--font-outfit)' }}
+        >
+          <span className="block text-[var(--text-primary)]">
+            Hi, I&apos;m <span className="text-[var(--neon-cyan)]">Liam</span>
+          </span>
+          <span className="block mt-2 text-[var(--text-primary)]">
+            I Build Digital
+          </span>
+          <span className="block mt-2">
+            <span className="relative">
+              <span className="text-[var(--neon-cyan)]">Experiences</span>
+              <svg 
+                className="absolute -bottom-2 left-0 w-full" 
+                viewBox="0 0 200 12" 
+                fill="none"
+                preserveAspectRatio="none"
+              >
+                <path 
+                  d="M2 8C30 3 70 3 100 6C130 9 170 9 198 4" 
+                  stroke="var(--neon-cyan)" 
+                  strokeWidth="3" 
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="animate-fade-in-up delay-300 max-w-2xl mx-auto text-lg sm:text-xl text-[var(--text-secondary)] mb-10">
+          Self-taught developer with a passion for crafting{" "}
+          <span className="text-[var(--text-primary)]">thoughtful, scalable solutions</span>{" "}
+          that turn ideas into impact. Specializing in modern web technologies and{" "}
+          <span className="text-[var(--text-primary)]">user-centric design</span>.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="animate-fade-in-up delay-400 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button
+            onClick={() => scrollToSection('projects')}
+            className="btn-primary w-full sm:w-auto"
+          >
+            <span>View My Work</span>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <a
+            href="https://github.com/Coderinsightmaven"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary w-full sm:w-auto"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+            </svg>
+            <span>GitHub Profile</span>
+          </a>
+        </div>
+
+        {/* Highlight Stats */}
+        <div className="animate-fade-in-up delay-500 flex flex-wrap items-center justify-center gap-6 md:gap-12">
+          {highlights.map((item, index) => (
+            <div key={index} className="text-center">
+              <div 
+                className="text-3xl sm:text-4xl font-bold text-[var(--neon-cyan)] mb-1"
+                style={{ fontFamily: 'var(--font-outfit)' }}
+              >
+                {item.value}
+              </div>
+              <div className="text-sm text-[var(--text-muted)]">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <button
+            onClick={() => scrollToSection('projects')}
+            className="p-2 rounded-full border border-[var(--glass-border)] text-[var(--text-muted)] hover:text-[var(--neon-cyan)] hover:border-[var(--neon-cyan)]/30 transition-colors"
+            aria-label="Scroll to projects"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </button>
+        </div>
       </div>
-      <RocketShip />
-    </div>
+
+      {/* Bottom Gradient Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[var(--bg-primary)] to-transparent pointer-events-none" />
+    </section>
   );
 }
