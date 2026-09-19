@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
+import { useReducedMotion } from 'framer-motion';
 
 const navigation = {
   main: [
-    { name: 'Home', href: '#home' },
     { name: 'Work', href: '#projects' },
     { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
@@ -22,7 +22,7 @@ const navigation = {
       ),
     },
     {
-      name: 'X',
+      name: 'Twitter',
       href: siteConfig.social.twitter,
       icon: (props: React.SVGProps<SVGSVGElement>) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -34,70 +34,75 @@ const navigation = {
 };
 
 export default function Footer() {
+  const prefersReducedMotion = useReducedMotion();
+  
   const scrollToSection = (href: string) => {
     const element = document.getElementById(href.slice(1));
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     }
   };
 
   return (
-    <footer className="relative border-t border-[var(--glass-border)]">
-      <div className="absolute top-0 left-0 right-0 h-px bg-[var(--neon-cyan)]/20" />
-      
-      <div className="section-container py-12">
-        <div className="flex flex-col items-center">
-          <button
-            onClick={() => scrollToSection('#home')}
-            className="group mb-6"
-          >
-            <span 
-              className="text-2xl font-extrabold"
-              style={{ fontFamily: 'var(--font-outfit)' }}
+    <footer className="relative border-t border-[var(--border)]">
+      <div className="section-container py-10">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => scrollToSection('#home')}
+              className="flex items-center gap-1 group"
             >
-              <span className="text-[var(--text-primary)]">{siteConfig.name}</span>
-              <span className="text-[var(--neon-cyan)]"> · </span>
-              <span className="text-[var(--neon-cyan)]">{siteConfig.brand}</span>
-            </span>
-          </button>
+              <span 
+                className="text-sm font-medium text-[var(--text-muted)] group-hover:text-[var(--text)] transition-colors"
+                style={{ fontFamily: 'var(--font-display)', transitionDuration: 'var(--duration-fast)' }}
+              >
+                {siteConfig.name}
+              </span>
+              <span className="text-[var(--text-faint)]">·</span>
+              <span 
+                className="text-sm font-medium text-[var(--text)] group-hover:text-[var(--accent)] transition-colors"
+                style={{ fontFamily: 'var(--font-display)', transitionDuration: 'var(--duration-fast)' }}
+              >
+                {siteConfig.brand}
+              </span>
+            </button>
 
-          <nav className="mb-6">
-            <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <button
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-sm text-[var(--text-muted)] hover:text-[var(--neon-cyan)] transition-colors"
-                  >
-                    {item.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </nav>
+            <nav className="hidden sm:block">
+              <ul className="flex items-center gap-4">
+                {navigation.main.map((item) => (
+                  <li key={item.name}>
+                    <button
+                      onClick={() => scrollToSection(item.href)}
+                      className="text-xs text-[var(--text-faint)] hover:text-[var(--text-muted)] transition-colors"
+                      style={{ transitionDuration: 'var(--duration-fast)' }}
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
 
-          <div className="flex items-center gap-4 mb-8">
+          <div className="flex items-center gap-4">
             {navigation.social.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--neon-cyan)] hover:bg-white/5 transition-colors"
+                className="p-1.5 text-[var(--text-faint)] hover:text-[var(--text-muted)] transition-colors"
+                style={{ transitionDuration: 'var(--duration-fast)' }}
               >
                 <span className="sr-only">{item.name}</span>
-                <item.icon className="w-5 h-5" aria-hidden="true" />
+                <item.icon className="w-4 h-4" aria-hidden="true" />
               </Link>
             ))}
+            
+            <span className="text-xs text-[var(--text-faint)]">
+              © {new Date().getFullYear()}
+            </span>
           </div>
-
-          <p className="text-sm text-[var(--text-muted)]">
-            &copy; {new Date().getFullYear()} {siteConfig.name} · {siteConfig.brand}. All rights reserved.
-          </p>
-
-          <p className="mt-2 text-xs text-[var(--text-muted)]/60">
-            Built with Next.js, TypeScript & Tailwind CSS
-          </p>
         </div>
       </div>
     </footer>

@@ -8,7 +8,7 @@ const outfit = Outfit({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -16,7 +16,7 @@ const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
@@ -29,8 +29,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Liam · Rivet | Freelance Software Development",
-  description: "Building production-ready websites, backends, and MVPs for businesses that move fast. Specializing in real-time systems, full-stack applications, and cross-platform desktop apps.",
-  keywords: ["freelance developer", "web development", "backend development", "MVP development", "react", "next.js", "typescript", "nestjs", "tauri", "Colorado"],
+  description: "Production websites, backends, and MVPs for businesses that move fast. Specializing in real-time systems and cross-platform applications.",
+  keywords: ["freelance developer", "web development", "backend development", "MVP development", "react", "next.js", "typescript", "nestjs", "tauri"],
   authors: [{ name: "Liam" }],
   creator: "Liam · Rivet",
   publisher: "Liam · Rivet",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Liam · Rivet | Freelance Software Development",
-    description: "Building production-ready websites, backends, and MVPs for businesses that move fast.",
+    description: "Production websites, backends, and MVPs for businesses that move fast.",
     siteName: "Liam · Rivet",
     locale: "en_US",
     type: "website",
@@ -56,18 +56,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Liam · Rivet | Freelance Software Development",
-    description: "Building production-ready websites, backends, and MVPs for businesses that move fast.",
+    description: "Production websites, backends, and MVPs for businesses that move fast.",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
 };
 
@@ -81,28 +74,16 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0a0a0f" />
+        <meta name="theme-color" content="#09090b" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body
         className={`${outfit.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} antialiased`}
         style={{ fontFamily: 'var(--font-jakarta), system-ui, sans-serif' }}
       >
-        <div className="fixed inset-0 bg-gradient-dark" aria-hidden="true" />
-        <div className="grid-bg" aria-hidden="true" />
-        <div className="noise-overlay" aria-hidden="true" />
-        
-        <div className="stars" role="presentation" aria-hidden="true">
-          {[...Array(12)].map((_, i) => (
-            <div key={i} className="star" data-star-index={i} />
-          ))}
-        </div>
-
         <FixedNavigation />
-
-        <main className="relative z-10">
+        <main className="relative">
           {children}
         </main>
       </body>

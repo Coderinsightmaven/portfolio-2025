@@ -2,46 +2,19 @@
 
 import { useState } from 'react';
 import { siteConfig } from '@/config/site';
+import { ScrollReveal } from './Motion';
 
-const contactMethods = [
-  {
-    icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      </svg>
-    ),
-    label: 'Email',
-    value: siteConfig.contact.email,
-    href: `mailto:${siteConfig.contact.email}`,
-    color: 'cyan',
-  },
-  {
-    icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-      </svg>
-    ),
-    label: 'GitHub',
-    value: '@Coderinsightmaven',
-    href: siteConfig.social.github,
-    color: 'purple',
-  },
-  {
-    icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-      </svg>
-    ),
-    label: 'Book a Call',
-    value: 'Schedule a meeting',
-    href: siteConfig.contact.calendar,
-    color: 'magenta',
-  },
-];
+const isPlaceholder = (value: string) => {
+  return value.includes('example.com') || value.includes('example') || value === '';
+};
 
 export default function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const emailConfigured = !isPlaceholder(siteConfig.contact.email);
+  const calendarConfigured = !isPlaceholder(siteConfig.contact.calendar);
+  const hasContactMethods = emailConfigured || calendarConfigured;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,190 +54,167 @@ export default function ContactSection() {
     }
   };
 
-  const getColorClass = (color: string) => {
-    switch (color) {
-      case 'cyan': return 'text-[var(--neon-cyan)] bg-[var(--neon-cyan)]/10 border-[var(--neon-cyan)]/20';
-      case 'purple': return 'text-[var(--neon-purple)] bg-[var(--neon-purple)]/10 border-[var(--neon-purple)]/20';
-      case 'magenta': return 'text-[var(--neon-magenta)] bg-[var(--neon-magenta)]/10 border-[var(--neon-magenta)]/20';
-      default: return '';
-    }
-  };
-
   return (
-    <section id="contact" className="relative py-24 lg:py-32">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[var(--neon-cyan)] rounded-full blur-[200px] opacity-5" />
-      </div>
+    <section id="contact" className="relative bg-[var(--bg-sunken)]">
+      <div className="section-container">
+        <div className="max-w-2xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-10">
+              <span className="section-label">Contact</span>
+              <h2 className="section-title">
+                Start a Project
+              </h2>
+              <p className="text-[var(--text-muted)] max-w-md mx-auto">
+                Tell me about what you&apos;re building. I&apos;ll get back to you within 24 hours.
+              </p>
+            </div>
+          </ScrollReveal>
 
-      <div className="section-container relative">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="section-label justify-center">
-              Get In Touch
-            </span>
-            <h2 
-              className="section-title"
-              style={{ fontFamily: 'var(--font-outfit)' }}
-            >
-              Ready to Start
-              <br />
-              <span className="text-[var(--neon-cyan)]">Your Project?</span>
-            </h2>
-            <p className="max-w-lg mx-auto text-[var(--text-secondary)]">
-              Tell me about what you&apos;re building. I&apos;ll get back to you within 24 hours 
-              to discuss scope, timeline, and next steps.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-            <div className="lg:col-span-2 space-y-4">
-              <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4">
-                Connect with me
-              </h3>
-              
-              {contactMethods.map((method) => (
-                <a
-                  key={method.label}
-                  href={method.href}
-                  target={method.href.startsWith('http') ? '_blank' : undefined}
-                  rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--glass-border)] hover:border-[var(--neon-cyan)]/30 transition-all duration-300"
-                >
-                  <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center border ${getColorClass(method.color)}`}>
-                    <method.icon className="w-5 h-5" />
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+              <div className="lg:col-span-2">
+                {hasContactMethods ? (
+                  <div className="space-y-3">
+                    {emailConfigured && (
+                      <a
+                        href={`mailto:${siteConfig.contact.email}`}
+                        className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-colors group"
+                        style={{ transitionDuration: 'var(--duration-fast)' }}
+                      >
+                        <div className="flex-shrink-0 w-8 h-8 rounded-md bg-[var(--accent-muted)] flex items-center justify-center">
+                          <svg className="w-4 h-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-[var(--text-faint)]">Email</p>
+                          <p className="text-sm text-[var(--text)] truncate group-hover:text-[var(--accent)] transition-colors">
+                            {siteConfig.contact.email}
+                          </p>
+                        </div>
+                      </a>
+                    )}
+                    
+                    {calendarConfigured && (
+                      <a
+                        href={siteConfig.contact.calendar}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-3 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)] hover:border-[var(--border-strong)] transition-colors group"
+                        style={{ transitionDuration: 'var(--duration-fast)' }}
+                      >
+                        <div className="flex-shrink-0 w-8 h-8 rounded-md bg-[var(--accent-muted)] flex items-center justify-center">
+                          <svg className="w-4 h-4 text-[var(--accent)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-[var(--text-faint)]">Schedule</p>
+                          <p className="text-sm text-[var(--text)] truncate group-hover:text-[var(--accent)] transition-colors">
+                            Book a call
+                          </p>
+                        </div>
+                      </a>
+                    )}
                   </div>
-                  <div className="flex-grow min-w-0">
-                    <div className="text-xs text-[var(--text-muted)]">{method.label}</div>
-                    <div className="text-sm font-medium text-[var(--text-primary)] truncate group-hover:text-[var(--neon-cyan)] transition-colors">
-                      {method.value}
-                    </div>
+                ) : (
+                  <div className="p-4 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)]">
+                    <p className="text-sm text-[var(--text-muted)]">
+                      Contact details coming soon. Use the form to get in touch.
+                    </p>
                   </div>
-                  <svg className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--neon-cyan)] group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              ))}
+                )}
 
-              <div className="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--glass-border)]">
-                <div className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 border border-[var(--glass-border)]">
-                    <svg className="w-5 h-5 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="mt-4 p-3 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)]">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-[var(--text-faint)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                  </div>
-                  <div>
-                    <div className="text-xs text-[var(--text-muted)]">Location</div>
-                    <div className="text-sm font-medium text-[var(--text-primary)]">
-                      {siteConfig.location} • Remote
-                    </div>
+                    <span className="text-sm text-[var(--text-muted)]">
+                      {siteConfig.location} · Remote
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="lg:col-span-3">
-              <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--glass-border)]">
-                <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4" style={{ fontFamily: 'var(--font-outfit)' }}>
-                  Send a Message
-                </h3>
-
-                <div className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="contact-name" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
-                        Name
-                      </label>
-                      <input
-                        id="contact-name"
-                        name="name"
-                        type="text"
-                        required
-                        className="w-full px-3 py-2.5 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--glass-border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--neon-cyan)]/50 focus:ring-1 focus:ring-[var(--neon-cyan)]/50 transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="contact-email" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
-                        Email
-                      </label>
-                      <input
-                        id="contact-email"
-                        name="email"
-                        type="email"
-                        required
-                        className="w-full px-3 py-2.5 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--glass-border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--neon-cyan)]/50 focus:ring-1 focus:ring-[var(--neon-cyan)]/50 transition-colors"
-                        placeholder="you@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="contact-message" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      name="message"
-                      rows={4}
-                      required
-                      className="w-full px-3 py-2.5 rounded-lg bg-[var(--bg-tertiary)] border border-[var(--glass-border)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--neon-cyan)]/50 focus:ring-1 focus:ring-[var(--neon-cyan)]/50 transition-colors resize-none"
-                      placeholder="Tell me about your project..."
-                    />
-                  </div>
-
-                  {submitStatus === 'success' && (
-                    <div className="p-3 rounded-lg bg-[var(--neon-green)]/10 border border-[var(--neon-green)]/30 animate-fade-in-up">
-                      <div className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-[var(--neon-green)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm font-medium text-[var(--neon-green)]">
-                          Message sent! I&apos;ll get back to you soon.
-                        </span>
+              <div className="lg:col-span-3">
+                <form onSubmit={handleSubmit} className="p-5 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)]">
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="contact-name" className="block text-xs font-medium text-[var(--text-muted)] mb-1.5">
+                          Name
+                        </label>
+                        <input
+                          id="contact-name"
+                          name="name"
+                          type="text"
+                          required
+                          className="w-full px-3 py-2 text-sm rounded-md bg-[var(--bg-canvas)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-faint)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                          style={{ transitionDuration: 'var(--duration-fast)' }}
+                          placeholder="Your name"
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="contact-email" className="block text-xs font-medium text-[var(--text-muted)] mb-1.5">
+                          Email
+                        </label>
+                        <input
+                          id="contact-email"
+                          name="email"
+                          type="email"
+                          required
+                          className="w-full px-3 py-2 text-sm rounded-md bg-[var(--bg-canvas)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-faint)] focus:outline-none focus:border-[var(--accent)] transition-colors"
+                          style={{ transitionDuration: 'var(--duration-fast)' }}
+                          placeholder="you@company.com"
+                        />
                       </div>
                     </div>
-                  )}
 
-                  {submitStatus === 'error' && (
-                    <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/30 animate-fade-in-up">
-                      <div className="flex items-center gap-2">
-                        <svg className="w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        <span className="text-sm font-medium text-red-400">
-                          Failed to send. Please try again or email directly.
-                        </span>
-                      </div>
+                    <div>
+                      <label htmlFor="contact-message" className="block text-xs font-medium text-[var(--text-muted)] mb-1.5">
+                        Message
+                      </label>
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        rows={4}
+                        required
+                        className="w-full px-3 py-2 text-sm rounded-md bg-[var(--bg-canvas)] border border-[var(--border)] text-[var(--text)] placeholder:text-[var(--text-faint)] focus:outline-none focus:border-[var(--accent)] transition-colors resize-none"
+                        style={{ transitionDuration: 'var(--duration-fast)' }}
+                        placeholder="Tell me about your project..."
+                      />
                     </div>
-                  )}
 
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full btn-primary justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                      </>
+                    {submitStatus === 'success' && (
+                      <div className="p-3 rounded-md bg-[var(--ok)]/10 border border-[var(--ok)]/30">
+                        <p className="text-sm text-[var(--ok)]">
+                          Message sent. I&apos;ll get back to you soon.
+                        </p>
+                      </div>
                     )}
-                  </button>
-                </div>
-              </form>
+
+                    {submitStatus === 'error' && (
+                      <div className="p-3 rounded-md bg-[var(--danger)]/10 border border-[var(--danger)]/30">
+                        <p className="text-sm text-[var(--danger)]">
+                          Failed to send. Please try again.
+                        </p>
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
