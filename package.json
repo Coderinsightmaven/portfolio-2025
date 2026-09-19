@@ -13,13 +13,17 @@
     "@heroicons/react": "^2.2.0",
     "@react-email/components": "^1.0.1",
     "@react-email/render": "^2.0.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "framer-motion": "^13.4.0",
     "next": "16.0.7",
     "react": "19.2.1",
     "react-dom": "19.1.0",
     "react-slick": "^0.31.0",
     "resend": "^6.1.2",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^6.1.19"
+    "styled-components": "^6.1.19",
+    "three": "^0.186.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -28,6 +32,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/react-slick": "^0.23.13",
+    "@types/three": "^0.186.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.7",
     "tailwindcss": "^4",
