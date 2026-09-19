@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import ContactForm from './ContactForm';
+import { siteConfig } from '@/config/site';
 
 const navigation = [
   { name: 'Home', href: '#home' },
   { name: 'Work', href: '#projects' },
+  { name: 'Services', href: '#services' },
   { name: 'About', href: '#about' },
   { name: 'Contact', href: '#contact' },
 ];
@@ -20,11 +22,9 @@ export default function FixedNavigation() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Update navbar background on scroll
       setScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
-      const sections = ['home', 'projects', 'about', 'contact'];
+      const sections = ['home', 'projects', 'services', 'about', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const section of sections) {
@@ -74,26 +74,26 @@ export default function FixedNavigation() {
       >
         <nav aria-label="Global" className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <div className="flex lg:flex-1">
               <button
                 onClick={() => scrollToSection('#home')}
                 className="group -m-1.5 p-1.5 flex items-center gap-2"
               >
-                <span className="sr-only">Liam&apos;s Portfolio</span>
+                <span className="sr-only">{siteConfig.name} · {siteConfig.brand}</span>
                 <div className="relative">
                   <span 
-                    className="text-2xl font-extrabold text-[var(--neon-cyan)]"
+                    className="text-xl font-extrabold"
                     style={{ fontFamily: 'var(--font-outfit)' }}
                   >
-                    LM
+                    <span className="text-[var(--text-primary)]">{siteConfig.name}</span>
+                    <span className="text-[var(--neon-cyan)]"> · </span>
+                    <span className="text-[var(--neon-cyan)]">{siteConfig.brand}</span>
                   </span>
                   <div className="absolute -inset-2 bg-[var(--neon-cyan)] opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300 rounded-full" />
                 </div>
               </button>
             </div>
 
-            {/* Desktop Navigation */}
             <div className="hidden lg:flex lg:gap-x-1">
               {navigation.map((item) => (
                 <button
@@ -108,7 +108,6 @@ export default function FixedNavigation() {
               ))}
             </div>
 
-            {/* CTA Button */}
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
               <button
                 onClick={() => setContactFormOpen(true)}
@@ -126,7 +125,6 @@ export default function FixedNavigation() {
               </button>
             </div>
 
-            {/* Mobile menu button */}
             <div className="lg:hidden">
               <button
                 type="button"
@@ -141,22 +139,22 @@ export default function FixedNavigation() {
         </nav>
       </header>
 
-      {/* Mobile Menu */}
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm" />
         <DialogPanel className="fixed inset-y-0 right-0 z-[9999] w-full max-w-sm overflow-y-auto bg-[var(--bg-secondary)] border-l border-[var(--glass-border)]">
-          {/* Mobile Header */}
           <div className="flex items-center justify-between p-6 border-b border-[var(--glass-border)]">
             <button
               onClick={() => scrollToSection('#home')}
               className="-m-1.5 p-1.5"
             >
-              <span className="sr-only">Liam&apos;s Portfolio</span>
+              <span className="sr-only">{siteConfig.name} · {siteConfig.brand}</span>
               <span 
-                className="text-2xl font-extrabold text-[var(--neon-cyan)]"
+                className="text-xl font-extrabold"
                 style={{ fontFamily: 'var(--font-outfit)' }}
               >
-                LM
+                <span className="text-[var(--text-primary)]">{siteConfig.name}</span>
+                <span className="text-[var(--neon-cyan)]"> · </span>
+                <span className="text-[var(--neon-cyan)]">{siteConfig.brand}</span>
               </span>
             </button>
             <button
@@ -169,7 +167,6 @@ export default function FixedNavigation() {
             </button>
           </div>
 
-          {/* Mobile Navigation Links */}
           <div className="p-6 space-y-2">
             {navigation.map((item) => (
               <button
@@ -186,7 +183,6 @@ export default function FixedNavigation() {
             ))}
           </div>
 
-          {/* Mobile CTA */}
           <div className="p-6 border-t border-[var(--glass-border)]">
             <button
               onClick={() => {
@@ -202,11 +198,10 @@ export default function FixedNavigation() {
             </button>
           </div>
 
-          {/* Social Links */}
           <div className="absolute bottom-6 left-6 right-6">
             <div className="flex items-center justify-center gap-4">
               <a
-                href="https://github.com/Coderinsightmaven"
+                href={siteConfig.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--neon-cyan)] transition-colors"
@@ -216,7 +211,7 @@ export default function FixedNavigation() {
                 </svg>
               </a>
               <a
-                href="https://x.com/TAmerican797466"
+                href={siteConfig.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--neon-cyan)] transition-colors"
@@ -225,22 +220,11 @@ export default function FixedNavigation() {
                   <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
                 </svg>
               </a>
-              <a
-                href="https://www.facebook.com/liam.marincik.5"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--neon-cyan)] transition-colors"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
-                </svg>
-              </a>
             </div>
           </div>
         </DialogPanel>
       </Dialog>
 
-      {/* Contact Form Modal */}
       <ContactForm isOpen={contactFormOpen} onClose={() => setContactFormOpen(false)} />
     </>
   );

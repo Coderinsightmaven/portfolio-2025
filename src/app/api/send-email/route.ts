@@ -1,14 +1,15 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = process.env.RESEND_API_KEY 
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { firstName, lastName, company, email, phoneNumber, country, message } = body;
 
-    // Validate required fields
     if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
         { error: 'Missing required fields' },
@@ -16,10 +17,21 @@ export async function POST(request: Request) {
       );
     }
 
-    // Send email using Resend
+    if (!resend) {
+      console.warn('RESEND_API_KEY not configured - email not sent');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 503 }
+      );
+    }
+
+    const phoneDisplay = phoneNumber 
+      ? (country ? `(${country}) ${phoneNumber}` : phoneNumber)
+      : '';
+
     const data = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Replace with your verified domain
-      to: process.env.CONTACT_EMAIL || 'your-email@example.com', // Your email
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: process.env.CONTACT_EMAIL || 'hello@example.com',
       replyTo: email,
       subject: `New Contact Form Submission from ${firstName} ${lastName}`,
       html: `
@@ -91,10 +103,10 @@ export async function POST(request: Request) {
                 </div>
                 ` : ''}
                 
-                ${phoneNumber ? `
+                ${phoneDisplay ? `
                 <div class="field">
                   <div class="label">Phone:</div>
-                  <div class="value">${country ? `(${country}) ` : ''}${phoneNumber}</div>
+                  <div class="value">${phoneDisplay}</div>
                 </div>
                 ` : ''}
                 
@@ -120,4 +132,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

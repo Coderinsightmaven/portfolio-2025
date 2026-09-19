@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { siteConfig } from '@/config/site';
 
 const contactMethods = [
   {
@@ -10,8 +11,8 @@ const contactMethods = [
       </svg>
     ),
     label: 'Email',
-    value: 'liammarincik@gmail.com',
-    href: 'mailto:liammarincik@gmail.com',
+    value: siteConfig.contact.email,
+    href: `mailto:${siteConfig.contact.email}`,
     color: 'cyan',
   },
   {
@@ -22,18 +23,18 @@ const contactMethods = [
     ),
     label: 'GitHub',
     value: '@Coderinsightmaven',
-    href: 'https://github.com/Coderinsightmaven',
+    href: siteConfig.social.github,
     color: 'purple',
   },
   {
     icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
     ),
-    label: 'X (Twitter)',
-    value: '@TAmerican797466',
-    href: 'https://x.com/TAmerican797466',
+    label: 'Book a Call',
+    value: 'Schedule a meeting',
+    href: siteConfig.contact.calendar,
     color: 'magenta',
   },
 ];
@@ -91,14 +92,12 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative py-24 lg:py-32">
-      {/* Background Accent */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[var(--neon-cyan)] rounded-full blur-[200px] opacity-5" />
       </div>
 
       <div className="section-container relative">
         <div className="max-w-4xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-12">
             <span className="section-label justify-center">
               Get In Touch
@@ -107,18 +106,17 @@ export default function ContactSection() {
               className="section-title"
               style={{ fontFamily: 'var(--font-outfit)' }}
             >
-              Let&apos;s Build Something
+              Ready to Start
               <br />
-              <span className="text-[var(--neon-cyan)]">Amazing Together</span>
+              <span className="text-[var(--neon-cyan)]">Your Project?</span>
             </h2>
             <p className="max-w-lg mx-auto text-[var(--text-secondary)]">
-              Have a project in mind or want to discuss opportunities? 
-              I&apos;m always open to new challenges and collaborations.
+              Tell me about what you&apos;re building. I&apos;ll get back to you within 24 hours 
+              to discuss scope, timeline, and next steps.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-            {/* Contact Methods */}
             <div className="lg:col-span-2 space-y-4">
               <h3 className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-4">
                 Connect with me
@@ -147,7 +145,6 @@ export default function ContactSection() {
                 </a>
               ))}
 
-              {/* Location */}
               <div className="p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--glass-border)]">
                 <div className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center bg-white/5 border border-[var(--glass-border)]">
@@ -159,14 +156,13 @@ export default function ContactSection() {
                   <div>
                     <div className="text-xs text-[var(--text-muted)]">Location</div>
                     <div className="text-sm font-medium text-[var(--text-primary)]">
-                      Colorado, USA • Remote Ready
+                      {siteConfig.location} • Remote
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="lg:col-span-3">
               <form onSubmit={handleSubmit} className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--glass-border)]">
                 <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4" style={{ fontFamily: 'var(--font-outfit)' }}>
@@ -174,7 +170,6 @@ export default function ContactSection() {
                 </h3>
 
                 <div className="space-y-4">
-                  {/* Name & Email Row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="contact-name" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
@@ -204,7 +199,6 @@ export default function ContactSection() {
                     </div>
                   </div>
 
-                  {/* Message */}
                   <div>
                     <label htmlFor="contact-message" className="block text-sm font-medium text-[var(--text-secondary)] mb-1.5">
                       Message
@@ -219,7 +213,6 @@ export default function ContactSection() {
                     />
                   </div>
 
-                  {/* Status Messages */}
                   {submitStatus === 'success' && (
                     <div className="p-3 rounded-lg bg-[var(--neon-green)]/10 border border-[var(--neon-green)]/30 animate-fade-in-up">
                       <div className="flex items-center gap-2">
@@ -227,7 +220,7 @@ export default function ContactSection() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                         <span className="text-sm font-medium text-[var(--neon-green)]">
-                          Message sent successfully!
+                          Message sent! I&apos;ll get back to you soon.
                         </span>
                       </div>
                     </div>
@@ -240,13 +233,12 @@ export default function ContactSection() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                         <span className="text-sm font-medium text-red-400">
-                          Failed to send. Please try again.
+                          Failed to send. Please try again or email directly.
                         </span>
                       </div>
                     </div>
                   )}
 
-                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -278,4 +270,3 @@ export default function ContactSection() {
     </section>
   );
 }
-

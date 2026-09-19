@@ -28,12 +28,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Liam | Full Stack Developer & Creative Technologist",
-  description: "Building thoughtful, scalable software that turns ideas into impact. Full-stack developer specializing in modern web technologies and innovative digital solutions.",
-  keywords: ["full stack developer", "web developer", "react", "next.js", "typescript", "portfolio", "Liam", "software engineer"],
+  title: "Liam · Rivet | Freelance Software Development",
+  description: "Building production-ready websites, backends, and MVPs for businesses that move fast. Specializing in real-time systems, full-stack applications, and cross-platform desktop apps.",
+  keywords: ["freelance developer", "web development", "backend development", "MVP development", "react", "next.js", "typescript", "nestjs", "tauri", "Colorado"],
   authors: [{ name: "Liam" }],
-  creator: "Liam",
-  publisher: "Liam",
+  creator: "Liam · Rivet",
+  publisher: "Liam · Rivet",
   formatDetection: {
     email: false,
     address: false,
@@ -46,23 +46,17 @@ export const metadata: Metadata = {
     ],
     apple: '/favicon.svg',
   },
-  metadataBase: new URL('https://www.liamm.me'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
-    title: "Liam | Full Stack Developer & Creative Technologist",
-    description: "Building thoughtful, scalable software that turns ideas into impact. Full-stack developer specializing in modern web technologies.",
-    url: "https://www.liamm.me",
-    siteName: "Liam's Portfolio",
+    title: "Liam · Rivet | Freelance Software Development",
+    description: "Building production-ready websites, backends, and MVPs for businesses that move fast.",
+    siteName: "Liam · Rivet",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Liam | Full Stack Developer & Creative Technologist",
-    description: "Building thoughtful, scalable software that turns ideas into impact.",
-    creator: "@liamdev",
+    title: "Liam · Rivet | Freelance Software Development",
+    description: "Building production-ready websites, backends, and MVPs for businesses that move fast.",
   },
   robots: {
     index: true,
@@ -96,22 +90,18 @@ export default function RootLayout({
         className={`${outfit.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} antialiased`}
         style={{ fontFamily: 'var(--font-jakarta), system-ui, sans-serif' }}
       >
-        {/* Background Layers */}
         <div className="fixed inset-0 bg-gradient-dark" aria-hidden="true" />
         <div className="grid-bg" aria-hidden="true" />
         <div className="noise-overlay" aria-hidden="true" />
         
-        {/* Falling Stars Background */}
         <div className="stars" role="presentation" aria-hidden="true">
           {[...Array(12)].map((_, i) => (
             <div key={i} className="star" data-star-index={i} />
           ))}
         </div>
 
-        {/* Navigation */}
         <FixedNavigation />
 
-        {/* Main Content */}
         <main className="relative z-10">
           {children}
         </main>
