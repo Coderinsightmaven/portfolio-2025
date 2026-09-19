@@ -1,27 +1,26 @@
 'use client';
 
-import { Suspense, useRef } from 'react';
+import { Suspense, useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 
-function RivetMark() {
+function RivetMark({ reducedMotion }: { reducedMotion: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
   
   useFrame((state) => {
-    if (groupRef.current) {
+    if (groupRef.current && !reducedMotion) {
       groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.15) * 0.12;
       groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.05;
     }
   });
 
+  const floatProps = reducedMotion 
+    ? { speed: 0, rotationIntensity: 0, floatIntensity: 0 }
+    : { speed: 1.5, rotationIntensity: 0.2, floatIntensity: 0.3, floatingRange: [-0.05, 0.05] as [number, number] };
+
   return (
-    <Float
-      speed={1.5}
-      rotationIntensity={0.2}
-      floatIntensity={0.3}
-      floatingRange={[-0.05, 0.05]}
-    >
+    <Float {...floatProps}>
       <group ref={groupRef} position={[0, 0, 0]}>
         <RoundedBox
           args={[1.8, 1.8, 0.35]}
@@ -105,7 +104,7 @@ function RivetMark() {
   );
 }
 
-function Scene() {
+function Scene({ reducedMotion }: { reducedMotion: boolean }) {
   return (
     <>
       <ambientLight intensity={0.4} />
@@ -119,12 +118,23 @@ function Scene() {
         intensity={0.3}
         color="#3D9CFF"
       />
-      <RivetMark />
+      <RivetMark reducedMotion={reducedMotion} />
     </>
   );
 }
 
 export default function Hero3D() {
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
   return (
     <div className="w-full h-full">
       <Suspense fallback={null}>
@@ -134,7 +144,7 @@ export default function Hero3D() {
           gl={{ antialias: true, alpha: true }}
           style={{ background: 'transparent' }}
         >
-          <Scene />
+          <Scene reducedMotion={reducedMotion} />
         </Canvas>
       </Suspense>
     </div>
